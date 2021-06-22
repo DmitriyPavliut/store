@@ -8,6 +8,7 @@
     <meta name="author" content="Pavljut Dmitriy">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="icon" href="/img/small-store-icon.jpg">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">

@@ -1,6 +1,6 @@
 <footer>
     <div class="footer__container">
-        <div class="container footer_wraper">
+        <div class="footer_wraper">
             <div class="logo">
                 <a href="{{ route('main') }}"><img src="/img/logo.png" alt="logo"></a>
             </div>

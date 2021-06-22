@@ -18,8 +18,6 @@ Auth::routes();
 Route::get('/',[App\Http\Controllers\MainController::class, 'index'])->name('main');;
 Route::get('/catalog',[App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::middleware(['role:admin'])->prefix('admin')->group(function () {
     Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('mainAdmin');;
 });
