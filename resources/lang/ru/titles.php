@@ -5,5 +5,6 @@ return array(
     'catalogTitle'=>'Каталог',
     'loginTitle' => 'Вход',
     'regTitle' => 'Регистрация',
-    'resetPassTitle' => 'Регистрация',
+    'resetPassTitle' => 'Восстановление пароля',
+    '404Title'=>'404',
 );

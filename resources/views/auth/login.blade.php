@@ -7,7 +7,7 @@
             <form method="POST" action="{{ route('login') }}">
                 @csrf
                 <div class="input_block">
-                        <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+                        <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="{{ Lang::get('formsFields.email') }}">
                     @error('email')
                     <span class="invalid_alert" role="alert">
                                         {{ $message }}
@@ -16,7 +16,7 @@
                 </div>
 
                 <div class="input_block">
-                        <input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Пароль">
+                        <input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="{{ Lang::get('formsFields.password') }}">
                     @error('password')
                     <span class="invalid_alert" role="alert">
                                         {{ $message }}
@@ -29,23 +29,23 @@
                             <label class="remember_checkbox">
                                 <input class="" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                                 <span></span>
-                                Оставаться в системе
+                                {{ Lang::get('formsFields.remember') }}
                             </label>
                 </div>
 
                 <div class="buttons_auth">
                         <button type="submit" class="button button_auth">
-                            Войти
+                            {{ Lang::get('formsFields.button_auth') }}
                         </button>
 
                         @if (Route::has('password.request'))
                             <a class="request_pass" href="{{ route('password.request') }}">
-                               Забыли пароль?
+                                {{ Lang::get('formsFields.password_request') }}
                             </a>
                         @endif
                 </div>
                 <div class="link_reg_form">
-                    <p>Нет учетной записи? <a href="{{ route('register') }}">Зарегистрироваться</a></p>
+                    <p>{{ Lang::get('formsFields.have_account_auth') }} <a href="{{ route('register') }}">{{ Lang::get('formsFields.register') }} </a></p>
                 </div>
             </form>
 @endsection

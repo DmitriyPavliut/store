@@ -1,4 +1,5 @@
 @extends('layouts.layout')
+@section('title',Lang::get('titles.404Title'))
 @section('content')
     <section id="block404">
         <div class="container block404">

@@ -7,7 +7,7 @@
     <form method="POST" action="{{ route('register') }}">
         @csrf
         <div class="input_block">
-            <input id="name" type="text" class=" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus placeholder="Имя Фамилия">
+            <input id="name" type="text" class=" @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus placeholder="{{ Lang::get('formsFields.name') }}">
             @error('name')
             <span class="invalid_alert" role="alert">
                                         {{ $message }}
@@ -15,7 +15,7 @@
             @enderror
         </div>
         <div class="input_block">
-            <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus placeholder="Email">
+            <input id="email" type="email" class=" @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus placeholder="{{ Lang::get('formsFields.email') }}">
             @error('email')
             <span class="invalid_alert" role="alert">
                                          {{ $message }}
@@ -24,7 +24,7 @@
         </div>
 
         <div class="input_block">
-            <input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="Пароль">
+            <input id="password" type="password" class=" @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="{{ Lang::get('formsFields.password') }}">
             @error('password')
             <span class="invalid_alert" role="alert">
                                         {{ $message }}
@@ -32,7 +32,7 @@
             @enderror
         </div>
         <div class="input_block">
-            <input id="password-confirm" type="password" class=" @error('password') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password" placeholder="Подтверждение пароля">
+            <input id="password-confirm" type="password" class=" @error('password') is-invalid @enderror" name="password_confirmation"  autocomplete="new-password" placeholder="{{ Lang::get('formsFields.password_confirm') }}">
         </div>
 
         <div class="checkbox_block">
@@ -40,7 +40,7 @@
             <label class="remember_checkbox">
                 <input class="" type="checkbox" name="accepted" id="accepted">
                 <span></span>
-                Принимаю условия пользования
+                {{ Lang::get('formsFields.accepted_reg') }}
             </label>
             @error('accepted')
             <span class="invalid_alert" role="alert">
@@ -51,11 +51,11 @@
 
         <div class="buttons_auth">
             <button type="submit" class="button button_reg">
-                Зарегистрироваться
+                {{ Lang::get('formsFields.register') }}
             </button>
         </div>
         <div class="link_reg_form">
-            <p>Уже есть учетная запись? <a href="{{ route('login') }}">Войти</a></p>
+            <p>{{ Lang::get('formsFields.have_account_reg') }} <a href="{{ route('login') }}">{{ Lang::get('formsFields.login') }}</a></p>
         </div>
     </form>
 @endsection
