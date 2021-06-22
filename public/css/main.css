@@ -301,7 +301,7 @@ header {
     background-color: #FF8A00;
     width: max-content;
     padding: 13px 57px;
-
+    cursor: pointer;
 }
 
 .button:hover {
@@ -359,4 +359,145 @@ header {
     width: 70%;
     display: flex;
     justify-content: space-between;
+}
+
+.login_form_section{
+    margin-top: 75px;
+    display: flex;
+    justify-content: space-between;
+}
+.login_form_section .login_img,
+.login_form{
+    max-height: 720px;
+    width: 50%;
+}
+
+.login_form h2{
+    font-weight: 600;
+    font-size: 1.625em;
+    line-height: 140%;
+    color: #252525;
+    margin-bottom: 160px;
+}
+
+.input_block{
+    border-bottom: 1px solid #BEBEBE;
+    width: 60%;
+    height: 30px;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.input_block input{
+    width: 80%;
+    outline:none;
+}
+
+.input_block input::placeholder {
+    font-weight: 500;
+    font-size: 0.875em;
+    line-height: 17px;
+    color: #A0A0A0;
+}
+
+.remember_checkbox input {
+    display: none;
+}
+.remember_checkbox span {
+    height: 10px;
+    width: 10px;
+    border: 1px solid gray;
+    display: inline-block;
+    position: relative;
+    background-color:#FFF;
+    border-radius:2px;
+    padding:3px;
+}
+.remember_checkbox [type=checkbox]:checked + span:before {
+    content: '\25A0';
+    position: absolute;
+    top: -1.5px;
+    left: 1px;
+    font-size:25px;
+    color:#FF8A00;
+}
+
+.remember_checkbox [type=checkbox]:checked+span{
+    border: 1px solid #FF8A00;
+}
+
+.remember_checkbox{
+    font-weight: 500;
+    font-size: 0.875em;
+    line-height: 17px;
+    color: #252525;
+}
+
+.buttons_auth{
+    margin-top: 182px;
+}
+
+.button_auth{
+    margin-right: 30px;
+    padding: 15px 92px;
+}
+
+.request_pass, .link_reg_form{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.875em;
+    line-height: 17px;
+    color: #A0A0A0;
+}
+
+.error_block{
+    height: 20px;
+}
+
+.checkbox_block{
+    position: relative;
+}
+
+.invalid_alert{
+    color: red;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 0.8em;
+    line-height: 10px;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 33px
+
+}
+
+.link_reg_form{
+    margin-top: 50px;
+}
+
+.link_reg_form a:hover{
+    color: #FF8A00;
+}
+
+.block404{
+    margin-top: 75px;
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.block404 img{
+    width: 60%;
+    height: 60%;
+}
+
+.block404 p a{
+    color: #FF8A00;
+}
+
+.block404 p a:hover{
+    opacity: 80%;
 }

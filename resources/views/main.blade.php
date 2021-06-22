@@ -1,6 +1,6 @@
 @extends('layouts.layout')
 
-@section('title','Главная')
+@section('title',Lang::get('titles.mainTitle'))
 @section('content')
     <section id="slider">
     <div class="slider">
@@ -33,13 +33,13 @@
 
             </div>
             <div class="img_block_about">
-                <img src="img/photo_2021-03-01_12-42-51.png" alt="about">
+                <img src="/img/photo_2021-03-01_12-42-51.png" alt="about">
             </div>
 
         </div>
         <div class="foot_block_about">
             <div class="img_block_about">
-                <img src="img/photo_2021-03-01_12-42-43(2).png" alt="about">
+                <img src="/img/photo_2021-03-01_12-42-43(2).png" alt="about">
             </div>
             <div class="text_block_about">
                 <h2>О нас</h2>
@@ -67,7 +67,7 @@
             <a class="slider-button button" href="{{ route('catalog') }}">Узнать больше</a>
         </div>
         <div class="img-block-catalog">
-            <img src="img/elean62862.png" alt="about">
+            <img src="/img/elean62862.png" alt="about">
         </div>
 
     </div>
@@ -78,17 +78,17 @@
         <h2>КОЛЛЕКЦИИ</h2>
         <div class="collection-list">
             <div class="collection-item">
-                <img src="img/colItem.png" alt="item">
+                <img src="/img/colItem.png" alt="item">
                 <h3>Свитер махровый</h3>
                 <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
             </div>
             <div class="collection-item">
-                <img src="img/colItem.png" alt="item">
+                <img src="/img/colItem.png" alt="item">
                 <h3>Свитер махровый</h3>
                 <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
             </div>
             <div class="collection-item">
-                <img src="img/colItem.png" alt="item">
+                <img src="/img/colItem.png" alt="item">
                 <h3>Свитер махровый</h3>
                 <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
             </div>

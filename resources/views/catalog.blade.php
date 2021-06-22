@@ -1,4 +1,4 @@
 @extends('layouts.layout')
 
-@section('title','Каталог')
+@section('title',Lang::get('titles.catalogTitle'))
 @section('content')

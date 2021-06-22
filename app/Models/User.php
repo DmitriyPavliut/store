@@ -41,4 +41,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function setAcceptedAttribute($value)
+    {
+        $this->attributes['accepted'] = ($value=='on')?($value=1):($value=0);
+    }
 }
