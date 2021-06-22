@@ -1,8 +1,8 @@
-@extends('layouts.header')
+@extends('layouts.layout')
 
 @section('title','Главная')
-
-<section id="slider">
+@section('content')
+    <section id="slider">
     <div class="slider">
         <div class="slider-content-text">
             <h2>можно придумать какой-нибудь заголовок</h2>
@@ -64,7 +64,7 @@
             <p>Часто используемый в печати и вэб-дизайне. Lorem Ipsum является стандартной "рыбой" для текстов на латинице
                 начала XVI века. В то время некий безымянный печатник Часто используемый в печати и вэб-дизайне. Lorem Ipsum
                 является.</p>
-            <a class="slider-button button" href="#">Узнать больше</a>
+            <a class="slider-button button" href="{{ route('catalog') }}">Узнать больше</a>
         </div>
         <div class="img-block-catalog">
             <img src="img/elean62862.png" alt="about">
@@ -97,4 +97,4 @@
     </div>
 </section>
 
-@extends('layouts.footer')
+@endsection

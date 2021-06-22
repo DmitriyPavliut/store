@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/',[App\Http\Controllers\MainController::class, 'index']);
+Route::get('/catalog',[App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');;
 
 Auth::routes();
 
