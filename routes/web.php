@@ -19,5 +19,8 @@ Route::get('/',[App\Http\Controllers\MainController::class, 'index'])->name('mai
 Route::get('/catalog',[App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
 
 Route::middleware(['role:admin'])->prefix('admin')->group(function () {
-    Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('mainAdmin');;
+    Route::get('/',[App\Http\Controllers\Admin\HomeController::class, 'index'])->name('homeAdmin');
+
+    Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
+    Route::resource('users', App\Http\Controllers\Admin\UserController::class);
 });

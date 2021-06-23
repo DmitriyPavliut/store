@@ -61,7 +61,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="index3.html" class="brand-link">
+        <a href="{{ route('homeAdmin') }}" class="brand-link">
             <img src="/admin_panel/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
             <span class="brand-text font-weight-light">Админ-панель</span>
         </a>
@@ -72,29 +72,43 @@
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item">
-                        <a href="./index.html" class="nav-link active">
-                            <i class="nav-icon fas fa-th"></i>
-                            <p>Главная</p>
+                        <a href="{{ route('homeAdmin') }}" class="nav-link">
+                            <i class="nav-icon fas fa-tachometer-alt"></i>
+                            <p>
+                                Главная
+                            </p>
                         </a>
                     </li>
-
                     <li class="nav-item">
                         <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-table"></i>
-                            <p>Товары</p>
+                            <i class="nav-icon far fa-newspaper"></i>
+                            <p>
+                                Блог
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{ route('post.index') }}" class="nav-link">--}}
+{{--                                    <p>Все статьи</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <a href="{{ route('post.create') }}" class="nav-link">--}}
+{{--                                    <p>Добавить статью</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('category.index') }}" class="nav-link">
+                            <i class="nav-icon fas fa-align-left"></i>
+                            <p>Категории</p>
                         </a>
                     </li>
-
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon fas fa-book"></i>
-                            <p> Категории</p>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="nav-icon  ion ion-person-add"></i>
+                        <a href="{{ route('users.index') }}" class="nav-link">
+                            <i class="nav-icon ion ion-person-add"></i>
                             <p>Пользователи</p>
                         </a>
                     </li>

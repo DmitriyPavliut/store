@@ -388,7 +388,7 @@ header {
 }
 
 .input_block input{
-    width: 80%;
+    width:100%;
     outline:none;
 }
 

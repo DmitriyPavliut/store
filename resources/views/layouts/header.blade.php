@@ -28,7 +28,7 @@
                 <div class="header_cart">
                     @if (Route::has('login'))
                             @auth
-                                <a href="{{ url('/home') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"><span class="menu-link_name">{{ Auth::user()->name }}</span></a>
+                                <a href="{{ url('/admin') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"><span class="menu-link_name">{{ Auth::user()->name }}</span></a>
                             @else
                             <a href="{{ route('login') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"></a>
                             @endauth
