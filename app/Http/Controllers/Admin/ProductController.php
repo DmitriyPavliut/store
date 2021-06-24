@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductImage;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -15,7 +18,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::orderBy('created_at', 'desc')->get();
+
+        return view('admin.product.index', [
+            'products' => $products
+        ]);
     }
 
     /**
@@ -25,7 +32,11 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::orderBy('created_at', 'DESC')->get();
+
+        return view('admin.product.create', [
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -36,7 +47,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $product= new Product();
+        $product->title=$request->title;
+        $product->titleID=str_slug($request->title);
+        $product->category_id=$request->cat_id;
+        $product->description=$request->description;
+        $product->price=$request->price;
+        $product->status=true;
+        $product->save();
+
+        $image=new ProductImage();
+        $image->img=$request->img;
+        $product->images()->save($image);
+
+        return redirect()->back()->withSuccess('Товар была успешно добавлена!');
     }
 
     /**
@@ -47,7 +71,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+
     }
 
     /**
@@ -58,7 +82,12 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::orderBy('created_at', 'DESC')->get();
+
+        return view('admin.product.edit', [
+            'categories' => $categories,
+            'product'=>$product
+        ]);
     }
 
     /**
@@ -70,7 +99,17 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->title=$request->title;
+        $product->titleID=str_slug($request->title);
+        $product->category_id=$request->cat_id;
+        $product->description=$request->description;
+        $product->price=$request->price;
+        $product->status=true;
+        $product->save();
+
+        $product->images()->update(['img'=>$request->img]);
+
+        return redirect()->route('product.index')->withSuccess('Товар была успешно добавлен!');
     }
 
     /**
@@ -81,6 +120,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->back()->withSuccess('Товар был успешно удален!');
     }
 }

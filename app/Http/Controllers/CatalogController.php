@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
     public function index(){
 
-        return view('catalog');
+        $products = Product::orderBy('created_at', 'desc')->get();
+
+        return view('catalog', [
+            'products' => $products
+        ]);
     }
 }

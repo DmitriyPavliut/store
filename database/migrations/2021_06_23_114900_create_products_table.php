@@ -17,9 +17,9 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('title');
             $table->string('titleID');
-            $table->text('description');
-            $table->decimal('price', $precision = 19, $scale = 2);
-            $table->boolean('status');
+            $table->text('description')->nullable();
+            $table->decimal('price', $precision = 19, $scale = 2)->nullable();
+            $table->boolean('status')->nullable();
             $table->unsignedBigInteger('category_id')->nullable();
             $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();

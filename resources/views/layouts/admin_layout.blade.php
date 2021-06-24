@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="/admin_panel/plugins/daterangepicker/daterangepicker.css">
     <!-- summernote -->
     <link rel="stylesheet" href="/admin_panel/plugins/summernote/summernote-bs4.min.css">
+    <link href="/admin_panel/dist/css/colorbox.css" rel="stylesheet">
+    <link href="/admin_panel/css/adminCss.css" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -80,11 +82,25 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('product.index') }}" class="nav-link">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon far fa-newspaper"></i>
-                            <p>Товары
+                            <p>
+                                Товары
+                                <i class="right fas fa-angle-left"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('product.index') }}" class="nav-link">
+                                    <p>Все товары</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('product.create') }}" class="nav-link">
+                                    <p>Добавить товар</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">
@@ -152,5 +168,22 @@
 <script src="/admin_panel/dist/js/demo.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="/admin_panel/dist/js/pages/dashboard.js"></script>
+<script type="text/javascript" src="/admin_panel/dist/js/jquery.colorbox-min.js"></script>
+<script type="text/javascript" src="/packages/barryvdh/elfinder/js/standalonepopup.js"></script>
+<script type="text/javascript" src="/admin_panel/js/script.js"></script>
+<script src='https://cdn.tiny.cloud/1/mu3lu1rux63tfusjxs4ol0lkvjhzywbugl3belhxk5g7z5fl/tinymce/5/tinymce.min.js' referrerpolicy="origin">
+</script>
+<script>
+    tinymce.init({
+        selector: '#textarea',
+        plugins: 'a11ychecker advcode casechange formatpainter linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tinycomments tinymcespellchecker',
+        toolbar: 'a11ycheck addcomment showcomments casechange checklist code formatpainter pageembed permanentpen table',
+        toolbar_mode: 'floating',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        file_picker_callback : elFinderBrowser
+    });
+</script>
+
 </body>
 </html>

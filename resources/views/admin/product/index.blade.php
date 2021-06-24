@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Все статьи</h1>
+                    <h1 class="m-0">Список товаров</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             @if (session('success'))
@@ -39,35 +39,41 @@
                                     Категория
                                 </th>
                                 <th>
-                                    Дата добавления
+                                    Дата изменения
+                                </th>
+                                <th>
+                                    Цена
                                 </th>
                                 <th style="width: 30%">
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($posts as $post)
+                            @foreach ($products as $product)
                                 <tr>
                                     <td>
-                                        {{ $post['id'] }}
+                                        {{ $product['id'] }}
                                     </td>
                                     <td>
-                                        {{ $post['title'] }}
+                                        {{ $product['title'] }}
                                     </td>
                                     <td>
-                                        {{ $post->category['title'] }}
+                                        {{ $product->category['title'] }}
                                     </td>
                                     <td>
-                                        {{ $post['created_at'] }}
+                                        {{ $product['updated_at'] }}
+                                    </td>
+                                    <td>
+                                        {{ $product['price'] }}
                                     </td>
 
                                     <td class="project-actions text-right">
-                                        <a class="btn btn-info btn-sm" href="{{ route('post.edit', $post['id']) }}">
+                                        <a class="btn btn-info btn-sm" href="{{ route('product.edit', $product['id']) }}">
                                             <i class="fas fa-pencil-alt">
                                             </i>
                                             Редактировать
                                         </a>
-                                        <form action="{{ route('post.destroy', $post['id']) }}" method="POST"
+                                        <form action="{{ route('product.destroy', $product['id']) }}" method="POST"
                                             style="display: inline-block">
                                             @csrf
                                             @method('DELETE')

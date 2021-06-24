@@ -8,7 +8,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Добавить сатью</h1>
+                    <h1 class="m-0">Добавить товар</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
             @if (session('success'))
@@ -28,19 +28,20 @@
                 <div class="col-lg-12">
                     <div class="card card-primary">
                         <!-- form start -->
-                        <form action="{{ route('post.store') }}" method="POST">
+                        <form action="{{ route('product.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Название</label>
                                     <input type="text" name="title" class="form-control" id="exampleInputEmail1"
-                                        placeholder="Введите название статьи" required>
+                                        placeholder="Введите название товара" required>
                                 </div>
                                 <div class="form-group">
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>Выберите категорию</label>
                                         <select name="cat_id" class="form-control" required>
+                                            <option selected disabled value="NULL">Категория не выбрана</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category['id'] }}">{{ $category['title'] }}</option>
                                             @endforeach
@@ -49,12 +50,17 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <textarea name="text" class="editor"></textarea>
+                                    <textarea id="textarea" name="description" placeholder="Введите описание товара"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Цена</label>
+                                    <input type="number" name="price" class="form-control" id="exampleInputEmail1"
+                                           placeholder="Введите Цену товара" required>
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="feature_image">Изображение статьи</label>
-                                    <img src="" alt="" class="img-uploaded" style="display: block; width: 300px">
+                                    <label for="feature_image">Изображение товара</label>
+                                    <img src="" alt="" class="img-uploaded">
                                     <input type="text" name="img" class="form-control" id="feature_image"
                                         name="feature_image" value="" readonly>
                                     <a href="" class="popup_selector" data-inputid="feature_image">Выбрать изображение</a>
