@@ -80,25 +80,11 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{ route('product.index') }}" class="nav-link">
                             <i class="nav-icon far fa-newspaper"></i>
-                            <p>
-                                Блог
-                                <i class="right fas fa-angle-left"></i>
+                            <p>Товары
                             </p>
                         </a>
-                        <ul class="nav nav-treeview">
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('post.index') }}" class="nav-link">--}}
-{{--                                    <p>Все статьи</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-{{--                            <li class="nav-item">--}}
-{{--                                <a href="{{ route('post.create') }}" class="nav-link">--}}
-{{--                                    <p>Добавить статью</p>--}}
-{{--                                </a>--}}
-{{--                            </li>--}}
-                        </ul>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('category.index') }}" class="nav-link">

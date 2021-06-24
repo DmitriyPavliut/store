@@ -42,7 +42,10 @@
                                     <select class="custom-select rounded-0" id="exampleSelectRounded0" name="parent_id">
                                         <option @if($category['parent_id']==null) selected @endif disabled value="NULL">Категория не выбрана</option>
                                         @foreach ($categories as $categoryItem)
-                                            <option @if($category['parent_id']==$categoryItem['id']) selected @endif value="{{ $categoryItem['id'] }}">{{ $categoryItem['title'] }}</option>
+                                            <option
+                                                @if($category['parent_id']==$categoryItem['id']) selected @endif
+                                            @if($category['id']==$categoryItem['id']) disabled @endif
+                                            value="{{ $categoryItem['id'] }}">{{ $categoryItem['title'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>

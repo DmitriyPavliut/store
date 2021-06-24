@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/',[App\Http\Controllers\MainController::class, 'index'])->name('main');;
+Route::get('/',[App\Http\Controllers\MainController::class, 'index'])->name('main');
 Route::get('/catalog',[App\Http\Controllers\CatalogController::class, 'index'])->name('catalog');
 
 Route::middleware(['role:admin'])->prefix('admin')->group(function () {
@@ -23,4 +23,5 @@ Route::middleware(['role:admin'])->prefix('admin')->group(function () {
 
     Route::resource('category', App\Http\Controllers\Admin\CategoryController::class);
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
+    Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
 });
