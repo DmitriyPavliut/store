@@ -60,7 +60,7 @@ class ProductController extends Controller
         $image->img=$request->img;
         $product->images()->save($image);
 
-        return redirect()->back()->withSuccess('Товар была успешно добавлена!');
+        return redirect()->back()->withSuccess('Товар была успешно добавлен!');
     }
 
     /**

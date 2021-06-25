@@ -35,7 +35,7 @@
                     @endif
                 </div>
                 <div class="header_cart">
-                    <a href="#" class="menu-link cart"><img src="/img/basket.png" alt="cart-icon"></a>
+                    <a href="{{ route('cart') }}" class="menu-link cart"><img src="/img/basket.png" alt="cart-icon"></a>
                 </div>
             </div>
         </div>

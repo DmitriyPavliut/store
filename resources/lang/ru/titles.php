@@ -3,6 +3,7 @@
 return array(
     'mainTitle'=>'Главная',
     'catalogTitle'=>'Каталог',
+    'cartTitle'=>'Корзина',
     'loginTitle' => 'Вход',
     'regTitle' => 'Регистрация',
     'resetPassTitle' => 'Восстановление пароля',

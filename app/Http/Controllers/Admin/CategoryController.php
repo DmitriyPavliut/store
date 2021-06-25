@@ -45,6 +45,7 @@ class CategoryController extends Controller
     {
         $new_category = new Category();
         $new_category->title = $request->title;
+        $new_category->titleID=str_slug($request->title);
         $new_category->parent_id=$request->parent_id;
         $new_category->save();
 
@@ -88,6 +89,7 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $category->title = $request->title;
+        $category->titleID=str_slug($request->title);
         $category->parent_id=$request->parent_id;
         $category->save();
 

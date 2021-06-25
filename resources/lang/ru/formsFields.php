@@ -15,6 +15,7 @@ return array(
     'have_account_reg'=>'Уже есть учетная запись?',
     'email_reset'=>'Введите Ваш email',
     'send_link'=>'Отправить ссылку на сброс пароля',
-    'confirm_pass'=>'Подтвердить пароль'
+    'confirm_pass'=>'Подтвердить пароль',
+    'in_basket'=>'Добавить в корзину'
 
 );
