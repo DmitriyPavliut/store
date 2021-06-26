@@ -27,6 +27,5 @@
             </div>
         </div>
     </section>
-{{--{{dd($item)}}--}}
 
 @endsection

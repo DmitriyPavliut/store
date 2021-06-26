@@ -22,33 +22,42 @@ class AjaxController extends Controller
     {
         if (isset($request->category)) {
             $cat = Category::where('titleID', $request->category)->first();
-            $products = Product::where('category_id', $cat->id)->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
-            if ($request->orderBy == 'price-low-high') {
-                $products = Product::where('category_id', $cat->id)->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
-            }
-            if ($request->orderBy == 'price-high-low') {
-                $products = Product::where('category_id', $cat->id)->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
-            }
-            if ($request->orderBy == 'name-a-z') {
-                $products = Product::where('category_id', $cat->id)->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
-            }
-            if ($request->orderBy == 'name-z-a') {
-                $products = Product::where('category_id', $cat->id)->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
-            }
-        } else {
-            $products = Product::orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+            $arChildren = $cat->child->toArray();
+            $arrayIdCategory = $this->editCategoryArr($arChildren);
+            $arrayIdCategory[] = $cat->id;
+
+            $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
 
             if ($request->orderBy == 'price-low-high') {
-                $products = Product::orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
+            }
+
+            if ($request->orderBy == 'price-high-low') {
+                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+            }
+
+            if ($request->orderBy == 'name-a-z') {
+                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
+            }
+
+            if ($request->orderBy == 'name-z-a') {
+                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+            }
+
+        } else {
+            $products = Product::where('status','1')->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+
+            if ($request->orderBy == 'price-low-high') {
+                $products = Product::where('status','1')->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'price-high-low') {
-                $products = Product::orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status','1')->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'name-a-z') {
-                $products = Product::orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status','1')->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'name-z-a') {
-                $products = Product::orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status','1')->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
         }
 
@@ -136,6 +145,7 @@ class AjaxController extends Controller
         $cart->street = $request->street;
         $cart->home = $request->home;
         $cart->flat = $request->flat;
+        $cart->fullPrice = \Cart::session($_COOKIE['cart_id'])->getSubTotal();
         $cart->save();
 
         foreach (\Cart::session($_COOKIE['cart_id'])->getContent()->toArray() as $item) {
@@ -147,5 +157,20 @@ class AjaxController extends Controller
         }
 
         return true;
+    }
+
+    protected function editCategoryArr($tree, $depth = 0)
+    {
+        $array = [];
+        if (is_array($tree)) {
+            foreach ($tree as $node) {
+                array_push($array, $node['id']);
+
+                if (isset($node['children']))
+                    $array = array_merge($array, $this->editCategoryArr($node['children'], $depth + 1));
+            }
+        }
+        return $array;
+
     }
 }

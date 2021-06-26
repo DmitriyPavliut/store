@@ -65,6 +65,13 @@
                                         name="feature_image" value="" readonly>
                                     <a href="" class="popup_selector" data-inputid="feature_image">Выбрать изображение</a>
                                 </div>
+                                <div class="form-group">
+                                    <label>Товар активен</label>
+                                    <select name="active" class="form-control" required>
+                                        <option selected value="1">Активен</option>
+                                        <option value="0">Не активен</option>
+                                    </select>
+                                </div>
                             </div>
                             <!-- /.card-body -->
 

@@ -14,6 +14,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/media.css">
     <script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script defer src="/js/jquery-3.6.0.min.js"></script>
     <script defer src="/js/main.js"></script>

@@ -53,12 +53,14 @@ class ProductController extends Controller
         $product->category_id=$request->cat_id;
         $product->description=$request->description;
         $product->price=$request->price;
-        $product->status=true;
+        $product->status=$request->active;
         $product->save();
 
-        $image=new ProductImage();
-        $image->img=$request->img;
-        $product->images()->save($image);
+        if($request->img) {
+            $image = new ProductImage();
+            $image->img = $request->img;
+            $product->images()->save($image);
+        }
 
         return redirect()->back()->withSuccess('Товар была успешно добавлен!');
     }
@@ -104,7 +106,7 @@ class ProductController extends Controller
         $product->category_id=$request->cat_id;
         $product->description=$request->description;
         $product->price=$request->price;
-        $product->status=true;
+        $product->status=$request->active;
         $product->save();
 
         $product->images()->update(['img'=>$request->img]);

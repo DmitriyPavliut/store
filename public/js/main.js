@@ -40,6 +40,7 @@ $(document).ready(function () {
             success: (data) => {
 
                 $('#cart-qty').text(parseInt($('#cart-qty').text()) + 1)
+                throw_message('Товар добавлен в корзину','#34b690')
             }
 
         });
@@ -61,6 +62,7 @@ $(document).ready(function () {
                 $('#cart-qty').text(data['count']);
                 $('#count-prod').text(data['count']);
                 $('.sup-price').text(data['allPrice']);
+                throw_message('Товар успешно удален','#34b690')
             }
 
         });
@@ -81,6 +83,7 @@ $(document).ready(function () {
                 $('#cart-qty').text(data['count']);
                 $('#count-prod').text(data['count']);
                 $('.sup-price').text(data['allPrice']);
+                throw_message('Количество товара изменено','#34b690')
             }
 
         });
@@ -102,6 +105,7 @@ $(document).ready(function () {
                 $('#cart-qty').text(data['count']);
                 $('#count-prod').text(data['count']);
                 $('.sup-price').text(data['allPrice']);
+                throw_message('Количество товара изменено','#34b690')
             }
 
         });
@@ -123,6 +127,7 @@ $(document).ready(function () {
                 $('#cart-qty').text(data['count']);
                 $('#count-prod').text(data['count']);
                 $('.sup-price').text(data['allPrice']);
+                throw_message('Количество товара изменено','#34b690')
             }
 
         });
@@ -132,28 +137,48 @@ $(document).ready(function () {
 
         event.preventDefault();
 
-        $.ajax({
-            url: "/sendOrder",
-            type: "POST",
-            data: {
-                name: $('#name').val(),
-                secondName: $('#second-name').val(),
-                street: $('#street').val(),
-                home: $('#home').val(),
-                flat: $('#flat').val(),
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: (data) => {
-                $('.cart-item').remove();
-                $('#cart-qty').text(0);
-                $('#count-prod').text(0);
-                $('.sup-price').text(0);
-                $('input').val('');
-            }
+        let alert = false;
+        $('#name').val().length == 0 ? ($('#name').addClass('alertInput'), alert = true) : $('#name').removeClass('alertInput');
+        $('#second-name').val().length == 0 ? ($('#second-name').addClass('alertInput'), alert = true) : $('#second-name').removeClass('alertInput');
+        $('#street').val().length == 0 ? ($('#street').addClass('alertInput'), alert = true) : $('#street').removeClass('alertInput');
+        $('#home').val().length == 0 ? ($('#home').addClass('alertInput'), alert = true) : $('#home').removeClass('alertInput');
+        $('#flat').val().length == 0 ? ($('#flat').addClass('alertInput'), alert = true) : $('#flat').removeClass('alertInput');
 
-        });
+        if(alert === true) throw_message('Введены неверные данные','red');
+        if(alert === false && $('.sup-price').text()==0) throw_message('Вы не выбрали товар','red');
+
+        if (alert === false && $('.sup-price').text()!=0) {
+            $.ajax({
+                url: "/sendOrder",
+                type: "POST",
+                data: {
+                    name: $('#name').val(),
+                    secondName: $('#second-name').val(),
+                    street: $('#street').val(),
+                    home: $('#home').val(),
+                    flat: $('#flat').val(),
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+                    $('.cart-item').remove();
+                    $('#cart-qty').text(0);
+                    $('#count-prod').text(0);
+                    $('.sup-price').text(0);
+                    $('input').val('');
+                    throw_message('Ваш заказ успешно оформлен','#34b690')
+                }
+
+            });
+        }
     });
+
+
+    function throw_message(str, color='#f9e5e6') {
+        $('#error_message').html(str);
+        $("#error_box").css("background", color);
+        $("#error_box").fadeIn(500).delay(5000).fadeOut(500);
+    }
 
 });

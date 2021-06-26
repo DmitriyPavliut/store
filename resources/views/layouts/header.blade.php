@@ -9,17 +9,15 @@
             <nav class="header__nav">
                 <ul class="menu header__menu">
                     <li><a href="{{ route('main') }}" class="menu__item">Главная</a></li>
-                    <li><a href="" class="menu__item">Мужское</a></li>
-                    <li><a href="" class="menu__item">Женское</a></li>
-                    <li><a href="" class="menu__item">Для клиента</a></li>
-                    <li><a href="" class="menu__item">Контакты</a></li>
+                    <li><a href="/catalog/muzskoe" class="menu__item">Мужское</a></li>
+                    <li><a href="/catalog/zenskoe" class="menu__item">Женское</a></li>
                 </ul>
             </nav>
         </div>
         <div class="header__content">
             <div class="header__content_nav">
-                <a href="#" class="content-menu__item">Мужское</a>
-                <a href="#" class="content-menu__item">Женское</a>
+                <a href="/catalog/muzskoe" class="content-menu__item">Мужское</a>
+                <a href="/catalog/zenskoe" class="content-menu__item">Женское</a>
             </div>
             <div class="logo">
                 <a href="{{ route('main') }}"><img src="/img/logo.png" alt="logo"></a>
@@ -35,9 +33,13 @@
                     @endif
                 </div>
                 <div class="header_cart">
-                    <a href="{{ route('cart') }}" class="menu-link cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : '0'}}</span></a>
+                    <a href="{{ route('cart') }}" class="menu-link basket_head cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : '0'}}</span></a>
                 </div>
             </div>
         </div>
     </div>
 </header>
+<div id='error_box'>
+    <p id='error_message'></p>
+</div>
+

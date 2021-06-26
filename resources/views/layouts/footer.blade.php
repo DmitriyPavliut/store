@@ -7,10 +7,8 @@
             <div class="footer__content">
                 <div class="footer__content_nav">
                     <a href="{{ route('main') }}" class="content-menu__item">Главная</a>
-                    <a href="" class="content-menu__item">Мужское</a>
-                    <a href="" class="content-menu__item">Женское</a>
-                    <a href="" class="content-menu__item">Для клиента</a>
-                    <a href="" class="content-menu__item">Контакты</a>
+                    <a href="/catalog/muzskoe" class="content-menu__item">Мужское</a>
+                    <a href="/catalog/zenskoe" class="content-menu__item">Женское</a>
                 </div>
                 <div class="header_cart_container">
                     <div class="header_cart">

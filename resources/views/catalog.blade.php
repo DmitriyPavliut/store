@@ -2,7 +2,6 @@
 
 @section('title',Lang::get('titles.catalogTitle'))
 @section('content')
-    {{dd($catarr)}}
 
     <section id="catalog_list">
         <div class="container catalog_list">
@@ -12,38 +11,29 @@
                     <div class="sorting">
                         <div class="item_sorting">
                             <label for="sortingSelect">Сортировать по:</label>
-                            <select class="" id="sortingSelect" name="sorting">
-                                <option class="product_sorting_btn" value="default">По умолчанию</option>
-                                <option class="product_sorting_btn" value="price-low-high">Цена: &#8593;</option>
-                                <option class="product_sorting_btn" value="price-high-low">Цена: &#8595;</option>
-                                <option class="product_sorting_btn" value="name-a-z">Название: А-Я</option>
-                                <option class="product_sorting_btn" value="name-z-a">Название: Я-А</option>
-                            </select>
-
+                            <div class="sortingSelect">
+                                <select id="sortingSelect" name="sorting">
+                                    <option class="product_sorting_btn" value="default">По умолчанию</option>
+                                    <option class="product_sorting_btn" value="price-low-high">Цена: &#8593;</option>
+                                    <option class="product_sorting_btn" value="price-high-low">Цена: &#8595;</option>
+                                    <option class="product_sorting_btn" value="name-a-z">Название: А-Я</option>
+                                    <option class="product_sorting_btn" value="name-z-a">Название: Я-А</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                    <h3>Бренд одежды</h3>
-                    <label class="filter_checkbox">
-                        <input class="" type="checkbox" name="remember" id="remember">
-                        <span></span>
-                        {{ Lang::get('formsFields.remember') }}
-                    </label>
-                    <label class="filter_checkbox">
-                        <input class="" type="checkbox" name="remember" id="remember">
-                        <span></span>
-                        {{ Lang::get('formsFields.remember') }}
-                    </label>
-                    <label class="filter_checkbox">
-                        <input class="" type="checkbox" name="remember" id="remember" }>
-                        <span></span>
-                        {{ Lang::get('formsFields.remember') }}
-                    </label>
-                    <label class="filter_checkbox">
-                        <input class="" type="checkbox" name="remember" id="remember">
-                        <span></span>
-                        {{ Lang::get('formsFields.remember') }}
-                    </label>
-
+                    <h3>Категории товара:</h3>
+                    <div class="category_list">
+                        @if (count($categoryList) > 0)
+                            <ul>
+                                @foreach ($categoryList as $itemList)
+                                    @include('partials.list', $itemList)
+                                @endforeach
+                            </ul>
+                        @else
+                            @include('partials.projects-none')
+                        @endif
+                    </div>
                 </div>
                 <div class="catalog_wrap">
                     <div class="catalog" id="catalog" @if(isset($cat)) data-category="{{$cat->titleID}}" @endif>

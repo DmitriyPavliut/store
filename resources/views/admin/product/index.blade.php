@@ -44,6 +44,9 @@
                                 <th>
                                     Цена
                                 </th>
+                                <th>
+                                    Статус
+                                </th>
                                 <th style="width: 30%">
                                 </th>
                             </tr>
@@ -65,6 +68,11 @@
                                     </td>
                                     <td>
                                         {{ $product['price'] }}
+                                    </td>
+                                    <td>
+                                        @if($product['status']==1) Активен
+                                        @else Неактивен
+                                        @endif
                                     </td>
 
                                     <td class="project-actions text-right">
