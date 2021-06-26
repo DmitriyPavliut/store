@@ -2,6 +2,8 @@
 
 @section('title',Lang::get('titles.catalogTitle'))
 @section('content')
+    {{dd($catarr)}}
+
     <section id="catalog_list">
         <div class="container catalog_list">
             <h2>{{Lang::get('titles.catalogTitle')}}</h2>

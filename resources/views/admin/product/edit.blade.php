@@ -58,16 +58,22 @@
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Цена</label>
-                                    <input type="number" name="price" class="form-control" id="exampleInputEmail1"
+                                    <input type="number" step="0.01" name="price" class="form-control" id="exampleInputEmail1"
                                            placeholder="Введите Цену товара" required value="{{ $product['price'] }}">
                                 </div>
 
 
                                 <div class="form-group">
                                     <label for="feature_image">Изображение статьи</label>
-                                    <img src="/{{ $product->images[0]['img'] }}" alt="" class="img-uploaded"
+                                    @php
+                                        $image = '';
+                                        if(count($product->images) > 0){
+                                            $image = $product->images[0]['img'];
+                                        }
+                                    @endphp
+                                    <img src="/{{ $image }}" alt="" class="img-uploaded"
                                         style="display: block; width: 300px">
-                                    <input type="text" value="/{{ $product->images[0]['img'] }}" name="img" class="form-control"
+                                    <input type="text" value="{{ $product->images[0]['img'] }}" name="img" class="form-control"
                                         id="feature_image" name="feature_image" value="" readonly>
                                     <a href="" class="popup_selector" data-inputid="feature_image">Выбрать изображение</a>
                                 </div>

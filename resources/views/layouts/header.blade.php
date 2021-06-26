@@ -35,7 +35,7 @@
                     @endif
                 </div>
                 <div class="header_cart">
-                    <a href="{{ route('cart') }}" class="menu-link cart"><img src="/img/basket.png" alt="cart-icon"></a>
+                    <a href="{{ route('cart') }}" class="menu-link cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : '0'}}</span></a>
                 </div>
             </div>
         </div>

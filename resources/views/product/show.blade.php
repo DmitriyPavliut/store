@@ -8,9 +8,9 @@
                 <h2>{{$item['title']}}</h2>
                 <p class="price-collection">{{$item['price']}}<sub class="currency-collection"> руб.</sub></p>
 
-                <p class="description">{{$item['description']}}</p>
+                <p class="description">{!!html_entity_decode(htmlentities($item['description']))!!}</p>
 
-                <button type="submit" class="button button_basket">
+                <button type="submit" class="button button_basket" id="button_basket" data-productId="{{$item->id}}">
                     {{ Lang::get('formsFields.in_basket') }}
                 </button>
             </div>

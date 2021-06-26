@@ -22,11 +22,16 @@ class CatalogController extends Controller
 
     public function showCategory(Request $request, $category){
         $cat = Category::where('titleID',$category)->first();
+
         $products = Product::where('category_id',$cat->id)->paginate(self::PAGINATIONCOUNT);
 
         return view('catalog',[
             'cat' => $cat,
             'products' => $products,
+            //'catarr'=>$cat->id,
+            'catarr'=>$cat->children,
         ]);
     }
+
+
 }

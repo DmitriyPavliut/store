@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Цена</label>
-                                    <input type="number" name="price" class="form-control" id="exampleInputEmail1"
+                                    <input type="number" step="0.01" name="price" class="form-control" id="exampleInputEmail1"
                                            placeholder="Введите Цену товара" required>
                                 </div>
 
