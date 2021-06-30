@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\ProductProperty;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
 class PropertyController extends Controller
@@ -15,7 +17,13 @@ class PropertyController extends Controller
      */
     public function index()
     {
-        //
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        $properties = ProductProperty::orderBy('created_at', 'desc')->get();
+
+        return view('admin.properties.index', [
+            'categories' => $categories,
+            'properties' => $this->getPropertiesArray($properties)
+        ]);
     }
 
     /**
@@ -31,18 +39,25 @@ class PropertyController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        $new_property = new ProductProperty();
+        $new_property->name = ucfirst($request->name);
+        $new_property->save();
+
+        $categories = Category::find($request->category_id);
+        $new_property->categories()->attach($categories);
+
+        return redirect()->back()->withSuccess('Свойство было успешно добавлено!');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\ProductProperty  $productProperty
+     * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
     public function show(ProductProperty $productProperty)
@@ -53,7 +68,7 @@ class PropertyController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\ProductProperty  $productProperty
+     * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
     public function edit(ProductProperty $productProperty)
@@ -64,8 +79,8 @@ class PropertyController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ProductProperty  $productProperty
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, ProductProperty $productProperty)
@@ -76,11 +91,28 @@ class PropertyController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\ProductProperty  $productProperty
+     * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
     public function destroy(ProductProperty $productProperty)
     {
-        //
+        $productProperty->delete();
+        return redirect()->back()->withSuccess('Свойство было успешно удалено!');
+    }
+
+    private function getPropertiesArray($properties)
+    {
+        $arrayProperties = [];
+        foreach ($properties as $property) {
+
+            $arrayCategories = $property->categories->toArray();
+            $property = $property->toArray();
+            $property['updated_at'] = date('Y-m-d H:i:s', strtotime($property['updated_at']));
+            $property['created_at'] = date('Y-m-d H:i:s', strtotime($property['created_at']));
+            $property['categories'] = $arrayCategories;
+
+            $arrayProperties[] = $property;
+        }
+        return $arrayProperties;
     }
 }

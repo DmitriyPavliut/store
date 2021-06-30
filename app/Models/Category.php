@@ -19,6 +19,11 @@ class Category extends Model
         return $this->hasMany('App\Models\Category','parent_id','id')->with('children');
     }
 
+    public function properties()
+    {
+        return $this->belongsToMany(ProductProperty::class,'category_has_property');
+    }
+
     public function Children()
     {
         return $this->hasMany(self::class, 'parent_id', 'id')->with('Children');

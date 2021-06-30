@@ -673,7 +673,6 @@ header {
 }
 
 .button_basket {
-    margin-top: 64px;
     padding: 13px 100px;
 }
 
@@ -757,7 +756,7 @@ header {
     margin: 0 30px;
 }
 
-.text-cart h3 {
+.text-cart a h3 {
     font-style: normal;
     font-weight: 500;
     font-size: 0.875em;
@@ -777,7 +776,7 @@ header {
     width: 200px;
 }
 
-.img-cart img {
+.img-cart a img {
     width: 100%;
 }
 
@@ -801,6 +800,13 @@ header {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                  not supported by any browser */
 }
 
 .minus:hover, .plus:hover {
@@ -953,3 +959,21 @@ select{
     top: -27px;
     left: -7px;
 }
+
+.button_basket_block{
+    display: flex;
+    margin-top: 64px;
+    align-items: center;
+}
+
+.button_basket_block .count-block{
+    margin-left: 20px;
+    margin-bottom: 18px;
+}
+
+/*
+.button_basket_block .count-block .minus, .button_basket_block .count-block .plus {
+    width: 44px;
+    height: 44px;
+}
+*/

@@ -36,13 +36,13 @@
                     </div>
                 </div>
                 <div class="catalog_wrap">
-                    <div class="catalog" id="catalog" @if(isset($cat)) data-category="{{$cat->titleID}}" @endif>
+                    <div class="catalog" id="catalog" @if(isset($cat)) data-category="{{$cat['titleID']}}" @endif>
 
                         @foreach ($products as $product)
                             @php
                                 $image = '';
-                                if(count($product->images) > 0){
-                                    $image = $product->images[0]['img'];
+                                if(count($product['images']) > 0){
+                                    $image =$product['images'][0]['img'];
                                 } else {
                                     $image = 'img/no_image.png';
                                 }
@@ -51,7 +51,7 @@
 
                             <div class="catalog-item">
                                 <div class="image_catalog-item">
-                                    <a href="/catalog/{{$product->category['titleID']}}/{{$product['titleID']}}_{{$product['id']}}"><img src="/{{$image}}" alt="item"></a>
+                                    <a href="/catalog/{{$product['category']['titleID']}}/{{$product['titleID']}}_{{$product['id']}}"><img src="/{{$image}}" alt="item"></a>
                                 </div>
                                 <h3>
                                     <a href="/catalog/{{$product['titleID']}}_{{$product['id']}}">{{$product['title']}}</a>
@@ -62,7 +62,7 @@
 
                         @endforeach
                     </div>
-                    {{$products->appends(request()->query())->links('pagination.index')}}
+                    {{$pagination->links('pagination.index')}}
                 </div>
             </div>
         </div>

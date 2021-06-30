@@ -109,6 +109,12 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('properties.index') }}" class="nav-link">
+                            <i class="nav-icon far fa-plus-square"></i>
+                            <p>Свойства</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="nav-icon ion ion-person-add"></i>
                             <p>Пользователи</p>

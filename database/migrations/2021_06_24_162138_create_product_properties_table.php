@@ -16,8 +16,6 @@ class CreateProductPropertiesTable extends Migration
         Schema::create('product_properties', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->BigInteger('category_id')->unsigned();
-            $table->foreign('category_id')->references('id')->on('categories');
             $table->timestamps();
         });
     }

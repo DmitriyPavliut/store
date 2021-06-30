@@ -18,7 +18,7 @@ class UserController extends Controller
         $users = User::orderBy('created_at', 'desc')->get();
 
         return view('admin.user.index', [
-            'users' => $users
+            'users' => $this->getUsersArray($users),
         ]);
     }
 
@@ -97,5 +97,22 @@ class UserController extends Controller
     {
         $user->delete();
         return redirect()->back()->withSuccess('Пользователь был успешно удален!');
+    }
+
+
+    private function getUsersArray($users)
+    {
+        $arrayUsers = [];
+        foreach ($users as $user) {
+
+            $arrayRoles = $user->getRoleNames()->toArray();
+            $user = $user->toArray();
+            $user['updated_at'] = date('Y-m-d H:i:s', strtotime($user['updated_at']));
+            $user['created_at'] = date('Y-m-d H:i:s', strtotime($user['created_at']));
+            $user['roles'] = $arrayRoles;
+
+            $arrayUsers[] = $user;
+        }
+        return $arrayUsers;
     }
 }

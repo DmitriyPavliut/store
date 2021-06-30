@@ -19,19 +19,19 @@
             </div>
             <div class="cart-items" id="cart-items">
                 <h3>Ваши товары</h3>
-                @if(isset($_COOKIE['cart_id']))
-                    @foreach(\Cart::session($_COOKIE['cart_id'])->getContent()->toArray() as $itemCart)
+                @if(isset($cartList))
+                    @foreach($cartList as $itemCart)
                         <div class="cart-item" data-productId="{{$itemCart['id']}}">
                             <div class="main-cart-item">
                                 <div class="img-cart">
-                                    <img src="{{$itemCart['attributes']['img']}}" alt="product">
+                                    <a href="{{$itemCart['attributes']['url']}}"><img src="{{$itemCart['attributes']['img']}}" alt="product"></a>
                                 </div>
                                 <div class="text-cart">
-                                    <h3>{{$itemCart['name']}}</h3>
+                                    <h3><a href="{{$itemCart['attributes']['url']}}">{{$itemCart['name']}}</a></h3>
                                     <div class="count-block" data-countProductId="{{$itemCart['id']}}">
-                                        <div class="minus"><span>&#8722;</span></div>
-                                        <input class="count-itemcart" type="number" min="1" value="{{$itemCart['quantity']}}">
-                                        <div class="plus"><span>&#43;</span></div>
+                                        <div class="minus" id="cart_minus"><span>&#8722;</span></div>
+                                        <input class="count-itemcart" id="count_itemcart" type="number" min="1" value="{{$itemCart['quantity']}}">
+                                        <div class="plus" id="cart_plus"><span>&#43;</span></div>
                                     </div>
                                     <p>{{$itemCart['price']}} <sub>руб.</sub></p>
                                 </div>
@@ -48,14 +48,18 @@
             <h2>Ваш заказ</h2>
             <div class="count-prod">
                 <p>
-                    Товары(<span id="count-prod">{{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : '0'}}</span>)
+                    Товары(<span id="count-prod">{{$cartQuantity}}</span>)
                 </p>
-                <p><span class="sup-price">{{isset($_COOKIE['cart_id']) ?\Cart::session($_COOKIE['cart_id'])->getSubTotal():"0"}}</span> <sub>руб.</sub>
+                <p>
+                    <span class="sup-price">{{$supPrice}}</span>
+                    <sub>руб.</sub>
                 </p>
             </div>
             <div class="res-price">
                 <p>Итого</p>
-                <p><span class="sup-price">{{isset($_COOKIE['cart_id']) ?\Cart::session($_COOKIE['cart_id'])->getSubTotal():'0'}}</span> <sub>руб.</sub>
+                <p>
+                    <span class="sup-price">{{$supPrice}}</span>
+                    <sub>руб.</sub>
                 </p>
             </div>
 

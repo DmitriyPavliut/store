@@ -15,9 +15,12 @@
     <link rel="stylesheet" href="/css/normalize.css">
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/media.css">
+    <link rel="stylesheet" media="screen,projection" href="/css/ui.totop.css" />
     <script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script defer src="/js/jquery-3.6.0.min.js"></script>
     <script defer src="/js/main.js"></script>
+    <script defer src="/js/easing.js" type="text/javascript"></script>
+    <script defer src="/js/jquery.ui.totop.js" type="text/javascript"></script>
 </head>
 <body>
 <div class="content">
@@ -26,6 +29,5 @@
     @yield('content')
 </div>
 @include('layouts.footer')
-
 </body>
 </html>

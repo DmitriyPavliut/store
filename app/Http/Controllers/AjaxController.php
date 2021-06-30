@@ -15,7 +15,7 @@ class AjaxController extends Controller
 {
     public function index()
     {
-        return view('errors.404');
+        return $this->returnView('errors.404');
     }
 
     public function sort(Request $request)
@@ -90,9 +90,10 @@ class AjaxController extends Controller
             'id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
-            'quantity' => 1,
+            'quantity' => $request->count,
             'attributes' => [
-                'img' => isset($product->images[0]->img) ? $product->images[0]->img : 'no_image.png'
+                'img' => isset($product->images[0]->img) ? $product->images[0]->img : 'no_image.png',
+                'url'=>"/catalog/".$product->category['titleID'].'/'.$product['titleID'].'_'.$product['id'],
             ]
         ]);
 

@@ -25,15 +25,15 @@
             <div class="header_cart_container">
                 <div class="header_cart">
                     @if (Route::has('login'))
-                            @auth
-                                <a href="{{ url('/admin') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"><span class="menu-link_name">{{ Auth::user()->name }}</span></a>
-                            @else
+                        @auth
+                            <a href="{{ url('/admin') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"><span class="menu-link_name">{{ Auth::user()->name }}</span></a>
+                        @else
                             <a href="{{ route('login') }}" class="menu-link cart"><img src="/img/user.png" alt="cart-icon"></a>
-                            @endauth
+                        @endauth
                     @endif
                 </div>
                 <div class="header_cart">
-                    <a href="{{ route('cart') }}" class="menu-link basket_head cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($_COOKIE['cart_id']) ? \Cart::session($_COOKIE['cart_id'])->getTotalQuantity() : '0'}}</span></a>
+                    <a href="{{ route('cart') }}" class="menu-link basket_head cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($cartQuantity)?$cartQuantity:'0'}}</span></a>
                 </div>
             </div>
         </div>

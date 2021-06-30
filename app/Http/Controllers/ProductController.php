@@ -30,7 +30,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -41,21 +41,22 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
-    public function show($cat,$product_name,$product_id){
-        $item = Product::where('id',$product_id)->first();
+    public function show($cat, $product_name, $product_id)
+    {
+        $item = Product::where('id', $product_id)->first();
 
-        return view('product.show',[
-            'item' => $item
+        return $this->returnView('product.show', [
+            'item' => $this->getProductsArray($item),
         ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -66,8 +67,8 @@ class ProductController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
@@ -78,11 +79,25 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
         //
+    }
+
+    private function getProductsArray($product)
+    {
+
+        $arrayImages = $product->images->toArray();
+        $arrayCategories = $product->category->toArray();
+        $product = $product->toArray();
+        $product['updated_at'] = date('Y-m-d H:i:s', strtotime($product['updated_at']));
+        $product['created_at'] = date('Y-m-d H:i:s', strtotime($product['created_at']));
+        $product['images'] = $arrayImages;
+        $product['category'] = $arrayCategories;
+
+        return $product;
     }
 }

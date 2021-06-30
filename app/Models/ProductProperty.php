@@ -10,4 +10,9 @@ class ProductProperty extends Model
     use HasFactory;
 
     protected $table = 'product_properties';
+
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,'category_has_property');
+    }
 }

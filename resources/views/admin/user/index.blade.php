@@ -70,7 +70,7 @@
                                         {{ $user['updated_at'] }}
                                     </td>
                                     <td>
-                                        @foreach ($user->getRoleNames() as $role)
+                                        @foreach ($user['roles'] as $role)
                                             {{$role}}</br>
                                         @endforeach
                                     </td>
