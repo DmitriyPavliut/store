@@ -85,6 +85,7 @@ class PropertiesController extends Controller
      */
     public function edit(ProductProperty $productProperty)
     {
+        dd($productProperty);
 
         return view('admin.properties.edit', [
             'property' => $this->getPropertyArray($productProperty),
@@ -111,8 +112,9 @@ class PropertiesController extends Controller
      */
     public function destroy(ProductProperty $productProperty)
     {
-        $productProperty->delete();
-        return redirect()->back()->withSuccess('Свойство было успешно удалено!');
+        dd($productProperty);
+       /* $productProperty->delete();
+        return redirect()->back()->withSuccess('Свойство было успешно удалено!');*/
     }
 
     private function getPropertiesArray($properties)

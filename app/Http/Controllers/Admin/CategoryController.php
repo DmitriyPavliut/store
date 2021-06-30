@@ -112,8 +112,8 @@ class CategoryController extends Controller
     {
         $arrayCategories = [];
         foreach ($categories as $categoryItem) {
-            if($categoryItem->parent_category['parent_id']!=null){
-                $categoryItem['parent_category']=$categoryItem->parent_category->toArray();
+            if ($categoryItem->parent_category['parent_id'] != null) {
+                $categoryItem['parent_category'] = $categoryItem->parent_category->toArray();
             }
             $categoryItem = $categoryItem->toArray();
             $categoryItem['updated_at'] = date('Y-m-d H:i:s', strtotime($categoryItem['updated_at']));
@@ -126,8 +126,8 @@ class CategoryController extends Controller
 
     private function getCategoryArray($categoryItem)
     {
-        if($categoryItem->parent_category['parent_id']!=null){
-            $categoryItem['parent_category']=$categoryItem->parent_category->toArray();
+        if ($categoryItem->parent_category['parent_id'] != null) {
+            $categoryItem['parent_category'] = $categoryItem->parent_category->toArray();
         }
         $categoryItem = $categoryItem->toArray();
         $categoryItem['updated_at'] = date('Y-m-d H:i:s', strtotime($categoryItem['updated_at']));

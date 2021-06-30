@@ -206,6 +206,12 @@ $(document).ready(function () {
         }
     });
 
+    $('.item_value_active').click(function () {
+        $('.item_value_active').css({'background-color':'', 'color': 'black'});
+        $(this).css({'background-color':'#FF8A00', 'color': 'white'});
+        $(this).parent().attr('data-value',$(this).attr('data-id'));
+    });
+
 
     function throw_message(str, color = '#f9e5e6') {
         $('#error_message').html(str);

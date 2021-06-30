@@ -50,5 +50,23 @@ $(document).ready(function () {
     $("body").on("click", "#addPropertyBlock", function () {
         $('#propertyBlock').children().last().after('<div class="col-3"><input type="text" class="form-control elem_properties"></div>')
     });
+/*
+    $('#category_product').change(function (){
+
+        $.ajax({
+            url: "/admin/getProperties",
+            type: "POST",
+            data: {
+                categoryId: this.value,
+            },
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: (data) => {
+
+            }
+
+        });
+    });*/
 
 });

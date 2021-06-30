@@ -40,7 +40,7 @@
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>Выберите категорию</label>
-                                        <select name="cat_id" class="form-control" required>
+                                        <select name="cat_id" class="form-control" id="category_product" required>
                                             <option selected disabled value="NULL">Категория не выбрана</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category['id'] }}">{{ $category['title'] }}</option>

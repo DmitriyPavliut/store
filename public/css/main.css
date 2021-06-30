@@ -964,6 +964,7 @@ select{
     display: flex;
     margin-top: 64px;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .button_basket_block .count-block{
@@ -971,6 +972,48 @@ select{
     margin-bottom: 18px;
 }
 
+.properties_block{
+    margin-top: 20px;
+}
+
+.properties_block_values{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+.item_value_prop{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 34px;
+    min-width: 34px;
+    border-radius: 2px;
+    border: 1px solid black;
+    margin-left: 10px;
+    cursor: pointer;
+    margin-top: 10px;
+    position:relative;
+}
+.item_value_deactive{
+    background-color: #737373;
+}
+.item_value_deactive:after{
+    content:"";
+    display:block;
+    position:absolute;
+    left:0;top:50%;
+    color:black;
+    width:100%;
+    height:0;
+    border-bottom:2px solid black;
+    transform:rotate(-45deg);
+}
+
+.item_value_active:hover{
+    background-color: #FF8A00;
+    color: white;
+}
 /*
 .button_basket_block .count-block .minus, .button_basket_block .count-block .plus {
     width: 44px;

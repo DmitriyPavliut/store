@@ -3,7 +3,6 @@
 @section('title', 'Редактирование категории')
 
 @section('content')
-    {{dd($property)}}
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">

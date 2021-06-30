@@ -50,6 +50,7 @@ class ProductController extends Controller
 
         return $this->returnView('product.show', [
             'item' => $this->getProductsArray($item),
+            'properties' =>$this->getPropertiesArray($item->category->properties),
         ]);
     }
 
@@ -91,13 +92,43 @@ class ProductController extends Controller
     {
 
         $arrayImages = $product->images->toArray();
+        $properties = $product->properties->toArray();
         $arrayCategories = $product->category->toArray();
         $product = $product->toArray();
         $product['updated_at'] = date('Y-m-d H:i:s', strtotime($product['updated_at']));
         $product['created_at'] = date('Y-m-d H:i:s', strtotime($product['created_at']));
         $product['images'] = $arrayImages;
+        $arrayProperties=[];
+        if(count($properties)>0){
+            foreach ($properties as $property){
+                $arrayProperties[]=$property['id'];
+            }
+        }
         $product['category'] = $arrayCategories;
+        $product['properties'] = $arrayProperties;
 
         return $product;
     }
+
+    private function getPropertiesArray($properties)
+    {
+        $arrayProperties = [];
+        foreach ($properties as $property) {
+            if (isset($property->values)) {
+                $arValue = $property->values->toArray();
+                $arProperty = $property->toArray();
+                $arProperty['values'] = $arValue;
+                $arrayProperties[] = $arProperty;
+            }
+
+            else{
+                $arProperty = $property->toArray();
+                $arProperty['values'] = [];
+                $arrayProperties[] = $arProperty;
+            }
+        }
+        return $arrayProperties;
+    }
+
+
 }
