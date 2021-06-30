@@ -106,7 +106,7 @@
                                         {{ $category['updated_at'] }}
                                     </td>
                                     <td>
-                                        {{ $category->parent_category['title'] }}
+                                        {{ $category['parent_category']['title'] }}
                                     </td>
 
                                     <td class="project-actions text-right">

@@ -21,7 +21,7 @@ class ProductController extends Controller
         $products = Product::orderBy('created_at', 'desc')->get();
 
         return view('admin.product.index', [
-            'products' => $products
+            'products' => $this->getProductsArray($products)
         ]);
     }
 
@@ -42,21 +42,21 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $product= new Product();
-        $product->title=$request->title;
-        $product->titleID=str_slug($request->title);
-        $product->category_id=$request->cat_id;
-        $product->description=$request->description;
-        $product->price=$request->price;
-        $product->status=$request->active;
+        $product = new Product();
+        $product->title = $request->title;
+        $product->titleID = str_slug($request->title);
+        $product->category_id = $request->cat_id;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->status = $request->active;
         $product->save();
 
-        if($request->img) {
+        if ($request->img) {
             $image = new ProductImage();
             $image->img = $request->img;
             $product->images()->save($image);
@@ -68,7 +68,7 @@ class ProductController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -79,7 +79,7 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
@@ -88,28 +88,28 @@ class ProductController extends Controller
 
         return view('admin.product.edit', [
             'categories' => $categories,
-            'product'=>$product
+            'product' => $this->getProductArray($product)
         ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Product $product)
     {
-        $product->title=$request->title;
-        $product->titleID=str_slug($request->title);
-        $product->category_id=$request->cat_id;
-        $product->description=$request->description;
-        $product->price=$request->price;
-        $product->status=$request->active;
+        $product->title = $request->title;
+        $product->titleID = str_slug($request->title);
+        $product->category_id = $request->cat_id;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->status = $request->active;
         $product->save();
 
-        $product->images()->update(['img'=>$request->img]);
+        $product->images()->update(['img' => $request->img]);
 
         return redirect()->route('product.index')->withSuccess('Товар была успешно добавлен!');
     }
@@ -117,12 +117,44 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param \App\Models\Product $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
         $product->delete();
         return redirect()->back()->withSuccess('Товар был успешно удален!');
+    }
+
+    private function getProductsArray($products)
+    {
+        $arrayProducts = [];
+        foreach ($products as $product) {
+
+            $arrayImages = $product->images->toArray();
+            $arrayCategories = $product->category->toArray();
+            $product = $product->toArray();
+            $product['updated_at'] = date('Y-m-d H:i:s', strtotime($product['updated_at']));
+            $product['created_at'] = date('Y-m-d H:i:s', strtotime($product['created_at']));
+            $product['images'] = $arrayImages;
+            $product['category'] = $arrayCategories;
+
+            $arrayProducts[] = $product;
+        }
+        return $arrayProducts;
+
+    }
+
+    private function getProductArray($products)
+    {
+        $arrayImages = $products->images->toArray();
+        $arrayCategories = $products->category->toArray();
+        $products = $products->toArray();
+        $products['updated_at'] = date('Y-m-d H:i:s', strtotime($products['updated_at']));
+        $products['created_at'] = date('Y-m-d H:i:s', strtotime($products['created_at']));
+        $products['images'] = $arrayImages;
+        $products['category'] = $arrayCategories;
+
+        return  $products;
     }
 }

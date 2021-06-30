@@ -16,8 +16,8 @@ class CreatePropertiesValuesTable extends Migration
         Schema::create('properties_values', function (Blueprint $table) {
             $table->id();
             $table->string('value');
-            $table->BigInteger('properties_id')->unsigned();
-            $table->foreign('properties_id')->references('id')->on('product_properties');
+            $table->BigInteger('property_id')->unsigned();
+            $table->foreign('property_id')->references('id')->on('product_properties');
             $table->timestamps();
         });
     }

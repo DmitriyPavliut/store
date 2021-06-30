@@ -1,6 +1,4 @@
-
-
-function elFinderBrowser (callback, value, meta) {
+function elFinderBrowser(callback, value, meta) {
     tinymce.activeEditor.windowManager.openUrl({
         title: 'File Manager',
         url: '/elfinder/tinymce5',
@@ -38,3 +36,19 @@ function elFinderBrowser (callback, value, meta) {
         }
     });
 }
+
+$(document).ready(function () {
+
+    $("body").on("change", ".elem_properties", function () {
+        let storedArray = [];
+        for (let elem of $('.elem_properties')) {
+            storedArray.push(elem.value);
+        }
+        $('#value_properties').val(storedArray);
+    });
+
+    $("body").on("click", "#addPropertyBlock", function () {
+        $('#propertyBlock').children().last().after('<div class="col-3"><input type="text" class="form-control elem_properties"></div>')
+    });
+
+});

@@ -5,10 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\ProductProperty;
+use App\Models\PropertyValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class PropertyController extends Controller
+class PropertiesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -51,6 +52,17 @@ class PropertyController extends Controller
         $categories = Category::find($request->category_id);
         $new_property->categories()->attach($categories);
 
+        $arrayValues=explode(",", $request->value);
+        if ($arrayValues) {
+            foreach ($arrayValues as $valueItem){
+                if(!empty($valueItem)){
+                    $value = new PropertyValue();
+                    $value->value = $valueItem;
+                    $new_property->values()->save($value);
+                }
+            }
+        }
+
         return redirect()->back()->withSuccess('Свойство было успешно добавлено!');
     }
 
@@ -73,7 +85,10 @@ class PropertyController extends Controller
      */
     public function edit(ProductProperty $productProperty)
     {
-        //
+
+        return view('admin.properties.edit', [
+            'property' => $this->getPropertyArray($productProperty),
+        ]);
     }
 
     /**
@@ -106,13 +121,29 @@ class PropertyController extends Controller
         foreach ($properties as $property) {
 
             $arrayCategories = $property->categories->toArray();
+            $arrayValues = $property->values->toArray();
             $property = $property->toArray();
             $property['updated_at'] = date('Y-m-d H:i:s', strtotime($property['updated_at']));
             $property['created_at'] = date('Y-m-d H:i:s', strtotime($property['created_at']));
             $property['categories'] = $arrayCategories;
+            $property['values'] = $arrayValues;
 
             $arrayProperties[] = $property;
         }
         return $arrayProperties;
+    }
+
+    private function getPropertyArray($property)
+    {
+        dd($property);
+        $arrayCategories = $property->categories->toArray();
+        $arrayValues = $property->values->toArray();
+        $property = $property->toArray();
+        /* $property['updated_at'] = date('Y-m-d H:i:s', strtotime($property['updated_at']));
+         $property['created_at'] = date('Y-m-d H:i:s', strtotime($property['created_at']));*/
+        $property['categories'] = $arrayCategories;
+        $property['values'] = $arrayValues;
+
+        return $property;
     }
 }

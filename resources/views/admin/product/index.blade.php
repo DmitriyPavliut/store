@@ -61,7 +61,7 @@
                                         {{ $product['title'] }}
                                     </td>
                                     <td>
-                                        {{ $product->category['title'] }}
+                                        {{ $product['category']['title'] }}
                                     </td>
                                     <td>
                                         {{ $product['updated_at'] }}

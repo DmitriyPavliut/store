@@ -15,4 +15,9 @@ class ProductProperty extends Model
     {
         return $this->belongsToMany(Category::class,'category_has_property');
     }
+
+    public function values()
+    {
+        return $this->hasMany('App\Models\PropertyValue', 'property_id', 'id');
+    }
 }

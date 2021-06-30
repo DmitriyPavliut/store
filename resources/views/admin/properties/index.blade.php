@@ -38,6 +38,32 @@
 
                                 <!-- /.card-body -->
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Значения свойства</label>
+                                    <input type="hidden" name="value" id="value_properties" value="">
+                                    <div class="row" id="propertyBlock">
+                                        <div class="col-3">
+                                            <input type="text" class="form-control elem_properties">
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="text" class="form-control elem_properties">
+                                        </div>
+                                        <div class="col-3">
+                                            <input type="text" class="form-control elem_properties">
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="btn-group" style="width: 15%" id="addPropertyBlock">
+                      <span class="btn btn-success col fileinput-button dz-clickable">
+                        <i class="fas fa-plus"></i>
+                        <span>Добавить значение</span>
+                      </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
                                     <label for="exampleSelectRounded0">Категории свойства</label>
                                     <select class="custom-select rounded-0" multiple="multiple" id="exampleSelectRounded0" name="category_id[]">
                                         <option selected disabled value="NULL">Категория не выбрана</option>
@@ -46,6 +72,7 @@
                                         @endforeach
                                     </select>
                                 </div>
+
                             </div>
 
                             <div class="card-footer">
@@ -89,6 +116,9 @@
                             <th>
                                 Относится к категории
                             </th>
+                            <th>
+                                Значения
+                            </th>
                             <th style="width: 30%">
                             </th>
                         </tr>
@@ -110,6 +140,12 @@
                                     @foreach($property['categories'] as $propCategory)
                                     {{$propCategory['title']}}
                                     </br>
+                                    @endforeach
+
+                                </td>
+                                <td>
+                                    @foreach($property['values'] as $value)
+                                    {{$value['value']}},
                                     @endforeach
 
                                 </td>
