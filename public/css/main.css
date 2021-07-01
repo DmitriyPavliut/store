@@ -7,8 +7,8 @@
     font-size: 16px;
 }
 
-html, body{
- margin: 0 auto;
+html, body {
+    margin: 0 auto;
 }
 
 .content {
@@ -801,12 +801,13 @@ header {
     align-items: center;
     cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none;   /* Chrome/Safari/Opera */
-    -khtml-user-select: none;    /* Konqueror */
-    -moz-user-select: none;      /* Firefox */
-    -ms-user-select: none;       /* Internet Explorer/Edge */
-    user-select: none;           /* Non-prefixed version, currently
-                                  not supported by any browser */
+    -webkit-user-select: none; /* Chrome/Safari/Opera */
+    -khtml-user-select: none; /* Konqueror */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none;
+    /* Non-prefixed version, currently
+                           not supported by any browser */
 }
 
 .minus:hover, .plus:hover {
@@ -891,7 +892,7 @@ header {
 }
 
 .category_list ul li,
-.item_sorting{
+.item_sorting {
     font-weight: bold;
     font-size: 1em;
     line-height: 17px;
@@ -911,7 +912,7 @@ header {
     position: fixed;
     width: 370px;
     right: 20px;
-    top: 20px;
+    top: 40px;
     -webkit-box-shadow: 0px 5px 5px 3px rgba(0, 0, 0, 0.3);
     box-shadow: 0px 5px 5px 3px rgba(0, 0, 0, 0.3);
     -webkit-border-radius: 5px;
@@ -926,25 +927,25 @@ header {
     font-weight: bold;
 }
 
-select{
-    border:0;
-    outline:0;
+select {
+    border: 0;
+    outline: 0;
 }
 
-.sortingSelect{
+.sortingSelect {
     margin: 10px 0;
 }
 
-.product_pagination{
-   display: flex;
+.product_pagination {
+    display: flex;
     justify-content: center;
 }
 
-.basket_head{
+.basket_head {
     position: relative;
 }
 
-#cart-qty{
+#cart-qty {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -960,29 +961,30 @@ select{
     left: -7px;
 }
 
-.button_basket_block{
+.button_basket_block {
     display: flex;
     margin-top: 64px;
     align-items: center;
     flex-wrap: wrap;
 }
 
-.button_basket_block .count-block{
+.button_basket_block .count-block {
     margin-left: 20px;
     margin-bottom: 18px;
 }
 
-.properties_block{
+.properties_block {
     margin-top: 20px;
 }
 
-.properties_block_values{
+.properties_block_values {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     margin-top: 10px;
 }
-.item_value_prop{
+
+.item_value_prop {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -991,35 +993,28 @@ select{
     border-radius: 2px;
     border: 1px solid black;
     margin-left: 10px;
-    cursor: pointer;
     margin-top: 10px;
-    position:relative;
-}
-.item_value_deactive{
-    background-color: #737373;
-}
-.item_value_deactive:after{
-    content:"";
-    display:block;
-    position:absolute;
-    left:0;top:50%;
-    color:black;
-    width:100%;
-    height:0;
-    border-bottom:2px solid black;
-    transform:rotate(-45deg);
+    position: relative;
 }
 
-.item_value_active:hover{
+.item_value_deactive {
+    background-color: #737373;
+}
+
+.item_value_active {
+    cursor: pointer;
+}
+
+.item_value_active:hover {
     background-color: #FF8A00;
     color: white;
 }
 
-.prop_blocks{
+.prop_blocks {
     display: flex;
 }
 
-.prop_block{
+.prop_block {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1027,19 +1022,63 @@ select{
     margin-right: 10px;
 }
 
-.prop_block h5{
+.prop_block h5 {
     font-size: 0.75em;
     line-height: 140%;
     color: #CACACA;
 
 }
-.prop_block p{
+
+.prop_block p {
     margin: 0 5px;
     font-size: 0.875em;
 }
-/*
-.button_basket_block .count-block .minus, .button_basket_block .count-block .plus {
-    width: 44px;
-    height: 44px;
+
+.carousel  {
+    max-width: 1080px;
+    margin: 50px auto;
+    width:100%;
 }
-*/
+.carousel-wrapper {
+    margin: 10px 30px;
+    overflow: hidden;
+    position:relative;
+}
+.carousel-items {
+    width: 10000px; ==
+    position: relative;
+}
+.carousel-block {
+    float: left;
+    width: 315px;
+    height: 450px;
+    margin: 0 12.5px;
+}
+.carousel-block img{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-button-left a, .carousel-button-right a{
+    width: 25px;
+    height: 36px;
+    position: relative;
+    top: 170px;
+    cursor: pointer;
+    text-decoration:none;
+}
+.carousel-button-left a{
+    float: left;
+    background: url(/img/carousel-left.png);
+}
+.carousel-button-right a{
+    float: right;
+    background: url(/img/carousel-right.png);
+}
+
+.collection-item img{
+    height: 80%;
+    width: 100%;
+}

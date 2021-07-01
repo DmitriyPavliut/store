@@ -27,31 +27,43 @@ $(document).ready(function () {
     $('#button_basket').click(function (event) {
 
         event.preventDefault();
-        let arrayProperties = Array.from($('.properties_block_values').map(function () {
-            return $(this).attr('data-value')
-        }));
 
-        $.ajax({
-            url: "/addToCart",
-            type: "POST",
-            data: {
-                id: $('#button_basket').attr('data-productId'),
-                count: $('#prod_count').val(),
-                properties: arrayProperties,
-            },
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            success: (data) => {
-
-                $('#cart-qty').text(parseInt($('#cart-qty').text()) + parseInt($('#prod_count').val()));
-                $('#prod_count').val(1);
-                $('.item_value_active').css({'background-color': '', 'color': 'black'});
-
-                throw_message('Товар добавлен в корзину', '#34b690');
+        let error=false;
+        $('.properties_block_values').map(function () {
+            if($(this).attr('data-value')==null){
+                error=true;
             }
-
         });
+
+        if(error==false) {
+            let arrayProperties = Array.from($('.properties_block_values').map(function () {
+                return $(this).attr('data-value')
+            }));
+            $.ajax({
+                url: "/addToCart",
+                type: "POST",
+                data: {
+                    id: $('#button_basket').attr('data-productId'),
+                    count: $('#prod_count').val(),
+                    properties: arrayProperties,
+                },
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: (data) => {
+
+                    $('#cart-qty').text(parseInt($('#cart-qty').text()) + parseInt($('#prod_count').val()));
+                    $('#prod_count').val(1);
+                    $('.item_value_active').css({'background-color': '', 'color': 'black'});
+
+                    throw_message('Товар добавлен в корзину', '#34b690');
+                }
+
+            });
+        }
+        else {
+            throw_message('Выберите свойства товара', 'red');
+        }
     });
 
     $('.del-cart').click(function () {
@@ -76,10 +88,9 @@ $(document).ready(function () {
         });
     });
 
-    $('#count_itemcart').change(function () {
+    $('.count-itemcart').change(function () {
 
         let value = this.value > 0 ? this.value : 1;
-
         $.ajax({
             url: "/editCart",
             type: "POST",
@@ -101,7 +112,7 @@ $(document).ready(function () {
         });
     });
 
-    $('#cart_minus').click(function () {
+    $('.cart_minus').click(function () {
         let value = parseInt($(this).next().val() - 1) > 0 ? -1 : 0;
         if (value != 0) {
             $.ajax({
@@ -128,7 +139,7 @@ $(document).ready(function () {
         }
     });
 
-    $('#cart_plus').click(function () {
+    $('.cart_plus').click(function () {
         $.ajax({
             url: "/editCartButton",
             type: "POST",
@@ -228,3 +239,49 @@ $(document).ready(function () {
     $().UItoTop({easingType: 'easeOutQuart'});
 
 });
+
+//Обработка клика на стрелку вправо
+$(document).on('click', ".carousel-button-right",function(){
+    var carusel = $(this).parents('.carousel');
+    right_carusel(carusel);
+    return false;
+});
+//Обработка клика на стрелку влево
+$(document).on('click',".carousel-button-left",function(){
+    var carusel = $(this).parents('.carousel');
+    left_carusel(carusel);
+    return false;
+});
+function left_carusel(carusel){
+    var block_width = $(carusel).find('.carousel-block').outerWidth();
+    $(carusel).find(".carousel-items .carousel-block").eq(-1).clone().prependTo($(carusel).find(".carousel-items"));
+    $(carusel).find(".carousel-items").css({"left":"-"+block_width+"px"});
+    $(carusel).find(".carousel-items .carousel-block").eq(-1).remove();
+    $(carusel).find(".carousel-items").animate({left: "0px"}, 200);
+
+}
+function right_carusel(carusel){
+    var block_width = $(carusel).find('.carousel-block').outerWidth();
+    $(carusel).find(".carousel-items").animate({left: "-"+ block_width +"px"}, 200, function(){
+        $(carusel).find(".carousel-items .carousel-block").eq(0).clone().appendTo($(carusel).find(".carousel-items"));
+        $(carusel).find(".carousel-items .carousel-block").eq(0).remove();
+        $(carusel).find(".carousel-items").css({"left":"0px"});
+    });
+}
+
+$(function() {
+//Раскомментируйте строку ниже, чтобы включить автоматическую прокрутку карусели
+    //auto_right('.carousel:first');
+})
+
+// Автоматическая прокрутка
+function auto_right(carusel){
+    setInterval(function(){
+        if (!$(carusel).is('.hover'))
+            right_carusel(carusel);
+    }, 3000)
+}
+// Навели курсор на карусель
+$(document).on('mouseenter', '.carousel', function(){$(this).addClass('hover')})
+//Убрали курсор с карусели
+$(document).on('mouseleave', '.carousel', function(){$(this).removeClass('hover')})

@@ -3,8 +3,6 @@
 @section('title',$item['title'])
 @section('content')
 
-            {{--{{dd(in_array(5,$item['properties']))}}--}}
-
     <section id="product_item">
         <div class="product_item_section">
             <div class="product_item">
@@ -17,7 +15,7 @@
                     <h3>{{$property['name']}}:</h3>
                     <div class="properties_block_values">
                     @foreach($property['values'] as $value)
-                        <div class="item_value_prop @if(in_array($value['id'],$item['properties'])) item_value_active @else item_value_deactive @endif" data-id="{{$value['id']}}">{{$value['value']}}</div>
+                        <div class="item_value_prop @if(in_array($value['id'],$item['properties'])) item_value_active @else item_value_deactive @endif" @if(in_array($value['id'],$item['properties'])) data-id="{{$value['id']}}" @endif>{{$value['value']}}</div>
                     @endforeach
                     </div>
                 </div>

@@ -171,6 +171,17 @@
 
 }
 
+@media screen and (max-width: 500px) {
+    .carousel-block {
+        float: left;
+        width: 173px;
+        height: 363px;
+    }
+    .carousel-button-left a, .carousel-button-right a {
+        top: 121px;
+    }
+}
+
 @media screen and (max-width: 479px) {
     .footer__content_nav {
         display: flex;

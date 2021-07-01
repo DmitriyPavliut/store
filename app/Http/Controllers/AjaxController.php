@@ -85,9 +85,11 @@ class AjaxController extends Controller
             $cart_id = $_COOKIE['cart_id'];
         }
 
+        $id=$product->id;
         $arProperties = [];
         if (isset($request->properties)) {
             foreach ($request->properties as $values) {
+                $id.='_'.$values;
                 $value = PropertyValue::find($values)->toArray();
                 $key = PropertyValue::find($values)->property->toArray();
                 $arProperties[$key['name']] = $value['value'];
@@ -98,7 +100,7 @@ class AjaxController extends Controller
         \Cart::session($cart_id);
 
         \Cart::add([
-            'id' => uniqid(),
+            'id' => $id,
             'prod_id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
@@ -164,10 +166,10 @@ class AjaxController extends Controller
 
         foreach (\Cart::session($_COOKIE['cart_id'])->getContent()->toArray() as $item) {
             $order = new Order();
-            $order->product_id = $item['id'];
+            $order->product_id = $item['prod_id'];
             $order->count = $item['quantity'];
             $cart->orders()->save($order);
-            \Cart::session($_COOKIE['cart_id'])->remove($item['id']);
+            \Cart::session($_COOKIE['cart_id'])->remove($item['prod_id']);
         }
 
         return true;

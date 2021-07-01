@@ -137,7 +137,7 @@ class ProductController extends Controller
         $properties = PropertyValue::find($propertyArray);
         $product->properties()->attach($properties);
 
-        return redirect()->route('product.index')->withSuccess('Товар была успешно добавлен!');
+        return redirect()->route('product.index')->withSuccess('Товар была успешно изменен!');
     }
 
     /**

@@ -38,9 +38,9 @@
 
                                     </div>
                                     <div class="count-block" data-countProductId="{{$itemCart['id']}}">
-                                        <div class="minus" id="cart_minus"><span>&#8722;</span></div>
+                                        <div class="minus cart_minus" id="cart_minus"><span>&#8722;</span></div>
                                         <input class="count-itemcart" id="count_itemcart" type="number" min="1" value="{{$itemCart['quantity']}}">
-                                        <div class="plus" id="cart_plus"><span>&#43;</span></div>
+                                        <div class="plus cart_plus" id="cart_plus"><span>&#43;</span></div>
                                     </div>
                                     <p>{{$itemCart['price']}} <sub>руб.</sub></p>
                                 </div>
