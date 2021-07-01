@@ -333,7 +333,7 @@ header {
 }
 
 .collection {
-    padding: 220px 0;
+    padding: 100px 0;
 }
 
 .collection h2 {
@@ -1034,51 +1034,33 @@ select {
     font-size: 0.875em;
 }
 
-.carousel  {
-    max-width: 1080px;
-    margin: 50px auto;
-    width:100%;
-}
-.carousel-wrapper {
-    margin: 10px 30px;
-    overflow: hidden;
-    position:relative;
-}
-.carousel-items {
-    width: 10000px; ==
-    position: relative;
-}
-.carousel-block {
-    float: left;
-    width: 315px;
-    height: 450px;
-    margin: 0 12.5px;
-}
-.carousel-block img{
-    display:flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+.owl-item div h3 {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 1em;
 }
 
-.carousel-button-left a, .carousel-button-right a{
-    width: 25px;
-    height: 36px;
-    position: relative;
-    top: 170px;
-    cursor: pointer;
-    text-decoration:none;
-}
-.carousel-button-left a{
-    float: left;
-    background: url(/img/carousel-left.png);
-}
-.carousel-button-right a{
-    float: right;
-    background: url(/img/carousel-right.png);
+.owl-prev {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 35%;
+    left: -30px;
+    display: block !important;
+    border: 0px solid black;
 }
 
-.collection-item img{
-    height: 80%;
-    width: 100%;
+.owl-next {
+    width: 15px;
+    height: 100px;
+    position: absolute;
+    top: 35%;
+    right: -30px;
+    display: block !important;
+    border: 0px solid black;
+}
+
+.owl-prev i, .owl-next i {
+    transform: scale(1, 3);
+    color: #ccc;
 }

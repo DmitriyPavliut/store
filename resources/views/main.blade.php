@@ -76,47 +76,25 @@
 <section id="collection">
     <div class="container collection">
         <h2>КОЛЛЕКЦИИ</h2>
-        <div class="carousel shadow">
-            <div class="carousel-button-left"><a href="#"></a></div>
-            <div class="carousel-button-right"><a href="#"></a></div>
-            <div class="carousel-wrapper">
-                <div class="carousel-items">
-                    @foreach($products as $product)
-                        @php
-                            $image = '';
-                            if(count($product['images']) > 0){
-                                $image =$product['images'][0]['img'];
-                            } else {
-                                $image = 'img/no_image.png';
-                            }
-                        @endphp
-                        <div class="carousel-block collection-item">
-                            <img src="{{$image}}" alt="" />
-                            <h3>{{$product['title']}}</h3>
-                            <p class="price-collection">{{$product['price']}}<sub class="currency-collection">руб.</sub></p>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-        {{--<div class="collection-list">
-            <div class="collection-item">
-                <img src="/img/colItem.png" alt="item">
-                <h3>Свитер махровый</h3>
-                <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
-            </div>
-            <div class="collection-item">
-                <img src="/img/colItem.png" alt="item">
-                <h3>Свитер махровый</h3>
-                <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
-            </div>
-            <div class="collection-item">
-                <img src="/img/colItem.png" alt="item">
-                <h3>Свитер махровый</h3>
-                <p class="price-collection">2550,00<sub class="currency-collection">руб.</sub></p>
-            </div>
 
-        </div>--}}
+        <div class="collection-list owl-carousel owl-theme">
+            @foreach($products as $product)
+                @php
+                    $image = '';
+                    if(count($product['images']) > 0){
+                        $image =$product['images'][0]['img'];
+                    } else {
+                        $image = 'img/no_image.png';
+                    }
+                @endphp
+                <div>
+                    <img src="{{$image}}" alt="item">
+                    <h3>{{$product['title']}}</h3>
+                    <p>{{$product['price']}}<sub class="currency-collection">руб.</sub></p>
+                </div>
+            @endforeach
+
+        </div>
     </div>
 </section>
 
