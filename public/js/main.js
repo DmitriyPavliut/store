@@ -1,4 +1,7 @@
 $(document).ready(function () {
+
+    $().UItoTop({ easingType: 'easeOutQuart' });
+
     $('.menu-burger__header').click(function () {
         $('.menu-burger__header').toggleClass('open-menu');
         $('.header__nav').toggleClass('open-menu');
@@ -30,7 +33,7 @@ $(document).ready(function () {
 
         let error = false;
         $('.properties_block_values').map(function () {
-            if ($(this).attr('data-value') == null) {
+            if ($(this).attr('data-value') == null && $(this).children('.item_value_active').length > 0) {
                 error = true;
             }
         });
@@ -55,6 +58,8 @@ $(document).ready(function () {
                     $('#cart-qty').text(parseInt($('#cart-qty').text()) + parseInt($('#prod_count').val()));
                     $('#prod_count').val(1);
                     $('.item_value_active').css({'background-color': '', 'color': 'black'});
+
+                    $('.properties_block_values').removeAttr('data-value');
 
                     throw_message('Товар добавлен в корзину', '#34b690');
                 }
@@ -196,7 +201,7 @@ $(document).ready(function () {
                     $('#count-prod').text(0);
                     $('.sup-price').text(0);
                     $('input').val('');
-                    throw_message('Ваш заказ успешно оформлен', '#34b690')
+                    throw_message('Ваш заказ №'+data+' успешно оформлен', '#34b690')
                 }
 
             });
@@ -235,8 +240,6 @@ $(document).ready(function () {
         $("#error_box").fadeIn(500).delay(4000).fadeOut(500);
     }
 
-    $().UItoTop({easingType: 'easeOutQuart'});
-
     // Owl Carousel
     var owl = $(".owl-carousel");
     owl.owlCarousel({
@@ -264,3 +267,4 @@ $(document).ready(function () {
     });
 
 });
+

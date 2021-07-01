@@ -32,9 +32,9 @@
                         @endauth
                     @endif
                 </div>
-               {{-- <div class="header_cart">
+                <div class="header_cart">
                     <a href="{{ route('cart') }}" class="menu-link basket_head cart"><img src="/img/basket.png" alt="cart-icon"><span id="cart-qty">{{isset($cartQuantity)?$cartQuantity:'0'}}</span></a>
-                </div>--}}
+                </div>
             </div>
         </div>
     </div>

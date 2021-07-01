@@ -140,11 +140,11 @@
     .header__content {
         width: 90%;
         display: flex;
-
+        justify-content: center;
     }
 
     .header__content .logo {
-        margin-left: 40px;
+        margin-left: 22px;
         width: 150px;
     }
 
@@ -194,7 +194,7 @@
     }
 
     .header_cart {
-        margin: 0;
+        margin: 0 -20px;
     }
 
     .cart-form_foot input,

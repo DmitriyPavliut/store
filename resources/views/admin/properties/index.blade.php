@@ -151,21 +151,26 @@
                                 </td>
 
                                 <td class="project-actions text-right">
-                                    <a class="btn btn-info btn-sm" href="{{ route('properties.edit', $property['id']) }}">
+                                    <a class="btn btn-info btn-sm" href="properties/edite/{{$property['id']}}">
                                         <i class="fas fa-pencil-alt">
                                         </i>
                                         Редактировать
                                     </a>
-                                    <form action="{{ route('properties.destroy', $property['id']) }}" method="POST"
-                                          style="display: inline-block">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm delete-btn">
-                                            <i class="fas fa-trash">
-                                            </i>
-                                            Удалить
-                                        </button>
-                                    </form>
+                                    <a class="btn btn-danger btn-sm delete-btn" href="properties/delete/{{$property['id']}}">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Удалить
+                                    </a>
+{{--                                    <form action="{{ route('properties.destroy', $property['id']) }}" method="POST"--}}
+{{--                                          style="display: inline-block">--}}
+{{--                                        @csrf--}}
+{{--                                        @method('DELETE')--}}
+{{--                                        <button type="submit" class="btn btn-danger btn-sm delete-btn">--}}
+{{--                                            <i class="fas fa-trash">--}}
+{{--                                            </i>--}}
+{{--                                            Удалить--}}
+{{--                                        </button>--}}
+{{--                                    </form>--}}
                                 </td>
                             </tr>
                         @endforeach

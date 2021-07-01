@@ -20,8 +20,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
-
-
+    {{--{{dd($property)}}--}}
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
@@ -32,26 +31,46 @@
                         <form action="{{ route('properties.update', $property['id']) }}" method="POST">
                             @csrf
                             @method('PUT')
+                            <input type="hidden" name="id" value="{{$property['id']}}">
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Название</label>
                                     <input type="text" value="{{ $property['name'] }}" name="title" class="form-control"
-                                        id="exampleInputEmail1" placeholder="Введите название категории" required>
+                                           id="exampleInputEmail1" placeholder="Введите название категории" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleSelectRounded0">Родительская категория</label>
-                                    <select class="custom-select rounded-0" id="exampleSelectRounded0" name="parent_id">
-                                     {{--   <option @if($category['parent_id']==null) selected @endif disabled value="NULL">Категория не выбрана</option>
-                                        @foreach ($categories as $categoryItem)
-                                            <option
-                                                @if($category['parent_id']==$categoryItem['id']) selected @endif
-                                            @if($category['id']==$categoryItem['id']) disabled @endif
-                                            value="{{ $categoryItem['id'] }}">{{ $categoryItem['title'] }}</option>
+                                    <label for="exampleInputEmail1">Значения свойства</label>
+                                    <input type="hidden" name="value" id="value_properties" value="{{$property['valueList']}}">
+                                    <div class="row" id="propertyBlock">
+                                    @foreach ($property['values'] as $value)
+                                            <div class="col-3">
+                                                <input type="text" class="form-control elem_properties" value="{{$value['value']}}">
+                                            </div>
+                                    @endforeach
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="btn-group" style="width: 15%" id="addPropertyBlock">
+                      <span class="btn btn-success col fileinput-button dz-clickable">
+                        <i class="fas fa-plus"></i>
+                        <span>Добавить значение</span>
+                      </span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="exampleSelectRounded0">Категории свойства</label>
+                                    <select class="custom-select rounded-0" multiple="multiple" id="exampleSelectRounded0" name="category_id[]">
+                                        <option @if (!isset($property['categories'])) selected @endif disabled value="NULL">Категория не выбрана</option>
+                                        @foreach ($categories as $category)
+                                            <option @if (in_array($category['id'],$property['categories'])) selected @endif value="{{ $category['id'] }}">{{ $category['title'] }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <!-- /.card-body -->--}}
+                            <!-- /.card-body -->
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-primary">Обновить</button>

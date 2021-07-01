@@ -85,11 +85,11 @@ class AjaxController extends Controller
             $cart_id = $_COOKIE['cart_id'];
         }
 
-        $id=$product->id;
+        $id = $product->id;
         $arProperties = [];
         if (isset($request->properties)) {
             foreach ($request->properties as $values) {
-                $id.='_'.$values;
+                $id .= '_' . $values;
                 $value = PropertyValue::find($values)->toArray();
                 $key = PropertyValue::find($values)->property->toArray();
                 $arProperties[$key['name']] = $value['value'];
@@ -101,12 +101,12 @@ class AjaxController extends Controller
 
         \Cart::add([
             'id' => $id,
-            'prod_id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
             'quantity' => $request->count,
             'attributes' => [
                 'img' => isset($product->images[0]->img) ? $product->images[0]->img : 'no_image.png',
+                'prod_id' => $product->id,
                 'url' => "/catalog/" . $product->category['titleID'] . '/' . $product['titleID'] . '_' . $product['id'],
                 'properties' => $arProperties
             ]
@@ -165,14 +165,22 @@ class AjaxController extends Controller
         $cart->save();
 
         foreach (\Cart::session($_COOKIE['cart_id'])->getContent()->toArray() as $item) {
+
+            $arProperties = [];
+
+            foreach ($item['attributes']['properties'] as $key => $value) {
+                $arProperties[] = $key . ': ' . $value;
+            }
+
             $order = new Order();
-            $order->product_id = $item['prod_id'];
+            $order->product_id = $item['attributes']['prod_id'];
             $order->count = $item['quantity'];
+            $order->properties = implode(', ', $arProperties);
             $cart->orders()->save($order);
-            \Cart::session($_COOKIE['cart_id'])->remove($item['prod_id']);
+            \Cart::session($_COOKIE['cart_id'])->remove($item['id']);
         }
 
-        return true;
+        return $cart->id;
     }
 
     protected function editCategoryArr($tree, $depth = 0)

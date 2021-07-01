@@ -23,12 +23,14 @@
 
     <script defer src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
     <script defer src="/js/jquery-3.6.0.min.js"></script>
-    <script defer src="/js/easing.js" type="text/javascript"></script>
+
 
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-    <script defer src="/js/main.js"></script>
+    <script defer src="/js/easing.js" type="text/javascript"></script>
     <script defer src="/js/jquery.ui.totop.js" type="text/javascript"></script>
+    <script defer src="/js/main.js"></script>
+
 </head>
 <body>
 <div class="content">

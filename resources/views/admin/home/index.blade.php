@@ -31,7 +31,8 @@
                         <div class="icon">
                             <i class="fas fa-table"></i>
                         </div>
-                        <a href="{{ route('product.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('product.index') }}" class="small-box-footer">More info
+                            <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
                 <!-- ./col -->
@@ -47,7 +48,8 @@
                         <div class="icon">
                             <i class="ion ion-person-add"> </i>
                         </div>
-                        <a href="{{ route('users.index') }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                        <a href="{{ route('users.index') }}" class="small-box-footer">More info
+                            <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -104,7 +106,6 @@
                         <tbody>
                         @foreach ($carts as $cart)
 
-
                             <tr>
                                 <td>
                                     {{ $cart['id'] }}
@@ -120,10 +121,16 @@
                                 </td>
 
                                 <td>
-                                @foreach($cart->orders as $item)
-                                    {{$item->prod['title'] . ' - '.$item['count']}}шт.
-                                </br>
-                                @endforeach
+                                    <table>
+                                        <tr>
+                                            @foreach($cart['orders'] as $item)
+                                                <td>{{$item['prod']['title']}}</td>
+                                                <td> {{$item['properties']}}</td>
+                                                <td>{{$item['count']}}шт.</td>
+                                                </br>
+                                        </tr>
+                                        @endforeach
+                                    </table>
                                 </td>
                                 <td>
                                     {{ $cart['fullPrice'] }}руб.

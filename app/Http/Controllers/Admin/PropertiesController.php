@@ -52,10 +52,10 @@ class PropertiesController extends Controller
         $categories = Category::find($request->category_id);
         $new_property->categories()->attach($categories);
 
-        $arrayValues=explode(",", $request->value);
+        $arrayValues = explode(",", $request->value);
         if ($arrayValues) {
-            foreach ($arrayValues as $valueItem){
-                if(!empty($valueItem)){
+            foreach ($arrayValues as $valueItem) {
+                if (!empty($valueItem)) {
                     $value = new PropertyValue();
                     $value->value = $valueItem;
                     $new_property->values()->save($value);
@@ -87,8 +87,20 @@ class PropertiesController extends Controller
     {
         dd($productProperty);
 
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        $properties = ProductProperty::orderBy('created_at', 'desc')->get();
+
         return view('admin.properties.edit', [
             'property' => $this->getPropertyArray($productProperty),
+        ]);
+    }
+
+    public function edite($id)
+    {
+        $categories = Category::orderBy('created_at', 'desc')->get();
+        return view('admin.properties.edit', [
+            'property' => $this->getPropertyArray(ProductProperty::find($id)),
+            'categories' => $categories,
         ]);
     }
 
@@ -99,9 +111,35 @@ class PropertiesController extends Controller
      * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ProductProperty $productProperty)
+    public function update(Request $request/*, ProductProperty $productProperty*/)
     {
-        //
+        $property = ProductProperty::find($request->id);
+        $property->name = ucfirst($request->title);
+        $property->save();
+
+        $property->categories()->detach();
+        $categories = Category::find($request->category_id);
+        $property->categories()->attach($categories);
+
+        $arrayValues = explode(",", $request->value);
+
+        $valueList = [];
+
+        foreach ($property->values->toArray() as $value) {
+            $valueList[] = $value['id'];
+        }
+
+        foreach ($valueList as $key => $valueItem) {
+            $value = PropertyValue::find($valueItem);
+            if (!empty($arrayValues[$key])) {
+                $value->value = $arrayValues[$key];
+                $value->update();
+            } else {
+                $value->delete();
+            }
+        }
+
+        return redirect()->route('properties.index')->withSuccess('Свойство было успешно изменено!');
     }
 
     /**
@@ -113,8 +151,19 @@ class PropertiesController extends Controller
     public function destroy(ProductProperty $productProperty)
     {
         dd($productProperty);
-       /* $productProperty->delete();
+        /* $productProperty->values()->delete();
+        $productProperty->categories()->detach();
+        $productProperty->delete();
         return redirect()->back()->withSuccess('Свойство было успешно удалено!');*/
+    }
+
+    public function delete($id)
+    {
+        $productProperty = ProductProperty::find($id);
+        $productProperty->values()->delete();
+        $productProperty->categories()->detach();
+        $productProperty->delete();
+        return redirect()->back()->withSuccess('Свойство было успешно удалено!');
     }
 
     private function getPropertiesArray($properties)
@@ -137,14 +186,28 @@ class PropertiesController extends Controller
 
     private function getPropertyArray($property)
     {
-        dd($property);
-        $arrayCategories = $property->categories->toArray();
+
+        $arrayCategories = [];
+        $categories = $property->categories->toArray();
         $arrayValues = $property->values->toArray();
         $property = $property->toArray();
         /* $property['updated_at'] = date('Y-m-d H:i:s', strtotime($property['updated_at']));
          $property['created_at'] = date('Y-m-d H:i:s', strtotime($property['created_at']));*/
+        if (isset ($categories)) {
+            foreach ($categories as $category) {
+                $arrayCategories[] = $category['id'];
+            }
+        }
+        $valueList = [];
+        if (isset ($arrayValues)) {
+            foreach ($arrayValues as $value) {
+                $valueList[] = $value['value'];
+            }
+        }
+
         $property['categories'] = $arrayCategories;
         $property['values'] = $arrayValues;
+        $property['valueList'] = implode(',', $valueList);
 
         return $property;
     }

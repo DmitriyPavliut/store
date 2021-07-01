@@ -37,6 +37,8 @@ Route::middleware(['role:admin'])->prefix('admin')->group(function () {
     Route::resource('users', App\Http\Controllers\Admin\UserController::class);
     Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('properties', App\Http\Controllers\Admin\PropertiesController::class);
+    Route::get('/properties/edite/{id}',[App\Http\Controllers\Admin\PropertiesController::class, 'edite']);
+    Route::get('/properties/delete/{id}',[App\Http\Controllers\Admin\PropertiesController::class, 'delete']);
 
     Route::get('/ajax', [App\Http\Controllers\Admin\AjaxController::class, 'index']);
     Route::post('/getProperties',[App\Http\Controllers\Admin\AjaxController::class, 'getProperties']);
