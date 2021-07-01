@@ -38,6 +38,6 @@ Route::middleware(['role:admin'])->prefix('admin')->group(function () {
     Route::resource('product', App\Http\Controllers\Admin\ProductController::class);
     Route::resource('properties', App\Http\Controllers\Admin\PropertiesController::class);
 
-    Route::get('/ajax', [App\Http\Controllers\AjaxController::class, 'index']);
-    Route::post('/getProperties',[App\Http\Controllers\AjaxController::class, 'getProperties']);
+    Route::get('/ajax', [App\Http\Controllers\Admin\AjaxController::class, 'index']);
+    Route::post('/getProperties',[App\Http\Controllers\Admin\AjaxController::class, 'getProperties']);
 });

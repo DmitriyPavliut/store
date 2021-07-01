@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PropertyValue;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,38 +27,38 @@ class AjaxController extends Controller
             $arrayIdCategory = $this->editCategoryArr($arChildren);
             $arrayIdCategory[] = $cat->id;
 
-            $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+            $products = Product::where('status', '1')->whereIn('category_id', $arrayIdCategory)->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
 
             if ($request->orderBy == 'price-low-high') {
-                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->whereIn('category_id', $arrayIdCategory)->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
             }
 
             if ($request->orderBy == 'price-high-low') {
-                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->whereIn('category_id', $arrayIdCategory)->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
 
             if ($request->orderBy == 'name-a-z') {
-                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->whereIn('category_id', $arrayIdCategory)->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
             }
 
             if ($request->orderBy == 'name-z-a') {
-                $products = Product::where('status','1')->whereIn('category_id', $arrayIdCategory)->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->whereIn('category_id', $arrayIdCategory)->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
 
         } else {
-            $products = Product::where('status','1')->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+            $products = Product::where('status', '1')->orderBy('created_at', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
 
             if ($request->orderBy == 'price-low-high') {
-                $products = Product::where('status','1')->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->orderBy('price')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'price-high-low') {
-                $products = Product::where('status','1')->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->orderBy('price', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'name-a-z') {
-                $products = Product::where('status','1')->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->orderBy('title')->paginate(CatalogController::PAGINATIONCOUNT);
             }
             if ($request->orderBy == 'name-z-a') {
-                $products = Product::where('status','1')->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
+                $products = Product::where('status', '1')->orderBy('title', 'desc')->paginate(CatalogController::PAGINATIONCOUNT);
             }
         }
 
@@ -71,6 +72,7 @@ class AjaxController extends Controller
 
     public function addToCart(Request $request)
     {
+        //return json_decode($request->properties);
         $product = Product::where('id', $request->id)->first();
 
 
@@ -83,17 +85,28 @@ class AjaxController extends Controller
             $cart_id = $_COOKIE['cart_id'];
         }
 
+        $arProperties = [];
+        if (isset($request->properties)) {
+            foreach ($request->properties as $values) {
+                $value = PropertyValue::find($values)->toArray();
+                $key = PropertyValue::find($values)->property->toArray();
+                $arProperties[$key['name']] = $value['value'];
+            }
+        }
+
 
         \Cart::session($cart_id);
 
         \Cart::add([
-            'id' => $product->id,
+            'id' => uniqid(),
+            'prod_id' => $product->id,
             'name' => $product->title,
             'price' => $product->price,
             'quantity' => $request->count,
             'attributes' => [
                 'img' => isset($product->images[0]->img) ? $product->images[0]->img : 'no_image.png',
-                'url'=>"/catalog/".$product->category['titleID'].'/'.$product['titleID'].'_'.$product['id'],
+                'url' => "/catalog/" . $product->category['titleID'] . '/' . $product['titleID'] . '_' . $product['id'],
+                'properties' => $arProperties
             ]
         ]);
 

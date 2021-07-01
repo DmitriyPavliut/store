@@ -50,8 +50,8 @@ $(document).ready(function () {
     $("body").on("click", "#addPropertyBlock", function () {
         $('#propertyBlock').children().last().after('<div class="col-3"><input type="text" class="form-control elem_properties"></div>')
     });
-/*
-    $('#category_product').change(function (){
+
+    $("body").on("change", "#category_product", function () {
 
         $.ajax({
             url: "/admin/getProperties",
@@ -63,10 +63,18 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             success: (data) => {
-
+                $('.item_prop').remove();
+                for(let item of data) {
+                    $('#properties_grop').children().last().after('<div class="item_prop"><label>'+item["name"]+'</label>' +
+                        '<select name="property_'+item['id']+'[]" class="form-control" required multiple>' +
+                        '<option selected disabled value="NULL">Свойство не выбрано</option></select></div>');
+                    for(let itemVal of item['values']) {
+                        $('#properties_grop').children().children().children().last().last().after('<option value='+itemVal["id"]+'>'+itemVal["value"]+'</option>');
+                    }
+                }
             }
 
         });
-    });*/
+    });
 
 });

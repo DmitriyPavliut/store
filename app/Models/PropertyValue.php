@@ -11,5 +11,14 @@ class PropertyValue extends Model
 
     protected $table = 'properties_values';
 
+    public function products()
+    {
+        return $this->belongsToMany(Product::class,'products_has_properties');
+    }
+
+    public function property()
+    {
+        return $this->belongsTo('App\Models\ProductProperty');
+    }
 
 }

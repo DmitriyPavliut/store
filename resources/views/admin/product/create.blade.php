@@ -48,6 +48,9 @@
                                         </select>
                                     </div>
                                 </div>
+                                <div class="form-group" id="properties_grop">
+                                    <div><label>Свойства товара:</label></div>
+                                </div>
 
                                 <div class="form-group">
                                     <textarea id="textarea" name="description" placeholder="Введите описание товара"></textarea>

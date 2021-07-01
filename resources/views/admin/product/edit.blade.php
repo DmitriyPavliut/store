@@ -35,21 +35,36 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Название</label>
                                     <input type="text" value="{{ $product['title'] }}" name="title" class="form-control"
-                                        id="exampleInputEmail1" placeholder="Введите название статьи" required>
+                                           id="exampleInputEmail1" placeholder="Введите название статьи" required>
                                 </div>
                                 <div class="form-group">
                                     <!-- select -->
                                     <div class="form-group">
                                         <label>Выберите категорию</label>
-                                        <select name="cat_id" class="form-control" required>
+                                        <select name="cat_id" class="form-control" required id="category_product">
                                             <option selected disabled value="NULL">Категория не выбрана</option>
                                             @foreach ($categories as $category)
                                                 <option value="{{ $category['id'] }}" @if ($category['id'] == $product['category_id']) selected
-                                            @endif>{{ $category['title'] }}
-                                            </option>
+                                                    @endif>{{ $category['title'] }}
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>
+                                </div>
+                                <div class="form-group" id="properties_grop">
+                                    <div><label>Свойства товара:</label></div>
+                                    @foreach($properties as $property)
+                                        <div class="item_prop"><label>{{$property['name']}}</label>
+                                            <select name="property_{{$property['id']}}[]'" class="form-control" required multiple>
+                                                <option selected disabled value="NULL">Свойство не выбрано</option>
+
+                                                @foreach($property['values'] as $value) {
+                                                <option @if(in_array($value['id'], $product['properties'])) selected @endif value='{{$value['id']}}'>{{$value['value']}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
+                                    @endforeach
                                 </div>
 
                                 <div class="form-group">
@@ -72,18 +87,21 @@
                                         }
                                     @endphp
                                     <img src="/{{ $image }}" alt="" class="img-uploaded"
-                                        style="display: block; width: 300px">
+                                         style="display: block; width: 300px">
                                     <input type="text" value="{{ $image}}" name="img" class="form-control"
-                                        id="feature_image" name="feature_image" value="" readonly>
-                                    <a href="" class="popup_selector" data-inputid="feature_image">Выбрать изображение</a>
+                                           id="feature_image" name="feature_image" value="" readonly>
+                                    <a href="" class="popup_selector" data-inputid="feature_image">Выбрать
+                                        изображение</a>
                                 </div>
                                 <div class="form-group">
                                     <label>Товар активен</label>
                                     <select name="active" class="form-control" required>
                                         <option @if ($product['status'] == 1) selected
-                                            @endif value="1">Активен</option>
+                                                @endif value="1">Активен
+                                        </option>
                                         <option @if ($product['status'] != 1) selected
-                                                @endif value="">Не активен</option>
+                                                @endif value="">Не активен
+                                        </option>
                                     </select>
                                 </div>
                             </div>

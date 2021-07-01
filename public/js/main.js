@@ -27,6 +27,9 @@ $(document).ready(function () {
     $('#button_basket').click(function (event) {
 
         event.preventDefault();
+        let arrayProperties = Array.from($('.properties_block_values').map(function () {
+            return $(this).attr('data-value')
+        }));
 
         $.ajax({
             url: "/addToCart",
@@ -34,6 +37,7 @@ $(document).ready(function () {
             data: {
                 id: $('#button_basket').attr('data-productId'),
                 count: $('#prod_count').val(),
+                properties: arrayProperties,
             },
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -42,6 +46,8 @@ $(document).ready(function () {
 
                 $('#cart-qty').text(parseInt($('#cart-qty').text()) + parseInt($('#prod_count').val()));
                 $('#prod_count').val(1);
+                $('.item_value_active').css({'background-color': '', 'color': 'black'});
+
                 throw_message('Товар добавлен в корзину', '#34b690');
             }
 
@@ -207,9 +213,9 @@ $(document).ready(function () {
     });
 
     $('.item_value_active').click(function () {
-        $('.item_value_active').css({'background-color':'', 'color': 'black'});
-        $(this).css({'background-color':'#FF8A00', 'color': 'white'});
-        $(this).parent().attr('data-value',$(this).attr('data-id'));
+        $(this).parent().children().css({'background-color': '', 'color': 'black'});
+        $(this).css({'background-color': '#FF8A00', 'color': 'white'});
+        $(this).parent().attr('data-value', $(this).attr('data-id'));
     });
 
 

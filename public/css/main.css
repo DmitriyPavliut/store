@@ -1014,6 +1014,29 @@ select{
     background-color: #FF8A00;
     color: white;
 }
+
+.prop_blocks{
+    display: flex;
+}
+
+.prop_block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.prop_block h5{
+    font-size: 0.75em;
+    line-height: 140%;
+    color: #CACACA;
+
+}
+.prop_block p{
+    margin: 0 5px;
+    font-size: 0.875em;
+}
 /*
 .button_basket_block .count-block .minus, .button_basket_block .count-block .plus {
     width: 44px;

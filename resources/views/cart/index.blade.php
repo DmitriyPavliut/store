@@ -28,6 +28,15 @@
                                 </div>
                                 <div class="text-cart">
                                     <h3><a href="{{$itemCart['attributes']['url']}}">{{$itemCart['name']}}</a></h3>
+                                    <div class="prop_blocks">
+                                        @foreach($itemCart['attributes']['properties'] as $key=>$value)
+                                            <div class="prop_block">
+                                            <h5>{{$key}}:</h5>
+                                            <p>{{$value}}</p>
+                                            </div>
+                                        @endforeach
+
+                                    </div>
                                     <div class="count-block" data-countProductId="{{$itemCart['id']}}">
                                         <div class="minus" id="cart_minus"><span>&#8722;</span></div>
                                         <input class="count-itemcart" id="count_itemcart" type="number" min="1" value="{{$itemCart['quantity']}}">
