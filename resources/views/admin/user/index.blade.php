@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Все категории')
+@section('title', 'Все пользователи')
 
 @section('content')
     <div class="content-header">

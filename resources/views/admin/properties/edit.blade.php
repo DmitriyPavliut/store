@@ -1,6 +1,6 @@
 @extends('layouts.admin_layout')
 
-@section('title', 'Редактирование категории')
+@section('title', 'Редактирование свойства')
 
 @section('content')
     <!-- Content Header (Page header) -->
