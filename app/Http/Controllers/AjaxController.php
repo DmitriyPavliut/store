@@ -173,7 +173,7 @@ class AjaxController extends Controller
             }
 
             $order = new Order();
-            $order->product_id = $item['attributes']['prod_id'];
+            $order->product = $item['name'];
             $order->count = $item['quantity'];
             $order->properties = implode(', ', $arProperties);
             $cart->orders()->save($order);

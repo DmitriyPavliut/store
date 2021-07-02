@@ -33,9 +33,7 @@ class HomeController extends Controller
         foreach ($carts as $cart) {
             $arrayOrders = [];
             foreach ($cart->orders as $order) {
-                $product = $order->prod->toArray();
                 $order = $order->toArray();
-                $order['title'] = $product['title'];
                 $arrayOrders[] = $order;
 
             }

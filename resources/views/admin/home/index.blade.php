@@ -124,7 +124,7 @@
                                     <table>
                                         <tr>
                                             @foreach($cart['orders'] as $item)
-                                                <td>{{$item['prod']['title']}}</td>
+                                                <td>{{$item['product']}}</td>
                                                 <td> {{$item['properties']}}</td>
                                                 <td>{{$item['count']}}шт.</td>
                                                 </br>

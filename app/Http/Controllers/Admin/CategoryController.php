@@ -104,8 +104,13 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        $category->delete();
-        return redirect()->back()->withSuccess('Категория была успешно удалена!');
+        if (count($category->products) || count($category->child_category)) {
+            return redirect()->back()->with('error', 'Ошибка! Есть привязанные товары или подкатегории');
+        } else {
+            $category->properties()->detach();
+            $category->delete();
+            return redirect()->back()->withSuccess('Категория была успешно удалена!');
+        }
     }
 
     private function getCategoriesArray($categories)

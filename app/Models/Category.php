@@ -11,17 +11,22 @@ class Category extends Model
 
     public function parent_category()
     {
-        return $this->hasOne('App\Models\Category','id','parent_id');
+        return $this->hasOne('App\Models\Category', 'id', 'parent_id');
+    }
+
+    public function child_category()
+    {
+        return $this->hasMany('App\Models\Category', 'parent_id', 'id');
     }
 
     public function child()
     {
-        return $this->hasMany('App\Models\Category','parent_id','id')->with('children');
+        return $this->hasMany('App\Models\Category', 'parent_id', 'id')->with('children');
     }
 
     public function properties()
     {
-        return $this->belongsToMany(ProductProperty::class,'category_has_property');
+        return $this->belongsToMany(ProductProperty::class, 'category_has_property');
     }
 
     public function Children()
@@ -29,5 +34,9 @@ class Category extends Model
         return $this->hasMany(self::class, 'parent_id', 'id')->with('Children');
     }
 
+    public function products()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 
 }

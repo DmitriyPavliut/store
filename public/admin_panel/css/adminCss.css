@@ -10,3 +10,7 @@
 .col-3{
     margin-top: 10px;
 }
+
+.alert-error{
+    background-color: red;
+}
