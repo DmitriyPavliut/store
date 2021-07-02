@@ -72,6 +72,7 @@
         justify-content: center;
         align-items: center;
         flex-direction: column-reverse;
+        margin-top: 155px;
     }
 
     .product_item_section .product_img {
@@ -79,6 +80,10 @@
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+
+    .product_item_section .product_item {
+        margin: 94px 20px;
     }
 
     .product_item_section {
