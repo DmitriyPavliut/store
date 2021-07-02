@@ -62,9 +62,7 @@
 
                         @endforeach
                     </div>
-                    @if(count($pagination)>1)
-                        {{$pagination->links('pagination.index')}}
-                    @endif
+                    {{$pagination->links('pagination.index')}}
                 </div>
             </div>
         </div>

@@ -537,6 +537,9 @@ header {
     display: flex;
 }
 
+.catalog_block .catalog_wrap{
+    min-width: 60%;
+}
 .catalog {
     display: flex;
     justify-content: center;
