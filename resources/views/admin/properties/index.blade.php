@@ -161,16 +161,16 @@
                                         </i>
                                         Удалить
                                     </a>
-{{--                                    <form action="{{ route('properties.destroy', $property['id']) }}" method="POST"--}}
-{{--                                          style="display: inline-block">--}}
-{{--                                        @csrf--}}
-{{--                                        @method('DELETE')--}}
-{{--                                        <button type="submit" class="btn btn-danger btn-sm delete-btn">--}}
-{{--                                            <i class="fas fa-trash">--}}
-{{--                                            </i>--}}
-{{--                                            Удалить--}}
-{{--                                        </button>--}}
-{{--                                    </form>--}}
+                                     {{--<form action="{{ route('properties.destroy', $property['id']) }}" method="POST"
+                                          style="display: inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm delete-btn">
+                                            <i class="fas fa-trash">
+                                            </i>
+                                            Удалить
+                                        </button>
+                                    </form>--}}
                                 </td>
                             </tr>
                         @endforeach

@@ -133,11 +133,23 @@ class PropertiesController extends Controller
             $value = PropertyValue::find($valueItem);
             if (!empty($arrayValues[$key])) {
                 $value->value = $arrayValues[$key];
+                unset($arrayValues[$key]);
                 $value->update();
             } else {
                 $value->delete();
+                unset($arrayValues[$key]);
             }
         }
+        if(!empty($arrayValues)){
+            foreach ($arrayValues as $valueItem){
+                if (!empty($valueItem)) {
+                    $value = new PropertyValue();
+                    $value->value = $valueItem;
+                    $property->values()->save($value);
+                }
+            }
+        }
+
 
         return redirect()->route('properties.index')->withSuccess('Свойство было успешно изменено!');
     }
@@ -148,7 +160,7 @@ class PropertiesController extends Controller
      * @param \App\Models\ProductProperty $productProperty
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ProductProperty $productProperty)
+    public function destroy(ProductProperty &$productProperty)
     {
         dd($productProperty);
         /* $productProperty->values()->delete();
