@@ -105,7 +105,7 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         if (count($category->products) || count($category->child_category)) {
-            return redirect()->back()->with('error', 'Ошибка! Есть привязанные товары или подкатегории');
+            return redirect()->back()->with('error', 'Ошибка удаления! Есть привязанные товары или подкатегории');
         } else {
             $category->properties()->detach();
             $category->delete();

@@ -9,7 +9,7 @@
                 <h2>{{$item['title']}}</h2>
                 <p class="price-collection">{{$item['price']}}<sub class="currency-collection"> руб.</sub></p>
 
-                <p class="description">{!!html_entity_decode(htmlentities($item['description']))!!}</p>
+                <div class="description">{!!html_entity_decode(htmlentities($item['description']))!!}</div>
                 @foreach($properties as $property)
                 <div class="properties_block">
                     <h3>{{$property['name']}}:</h3>
