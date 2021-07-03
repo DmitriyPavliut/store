@@ -48,10 +48,15 @@ class ProductController extends Controller
     {
         $item = Product::where('id', $product_id)->first();
 
+        if(!$item){
+            return $this->returnView('errors.404');
+        }
+        else{
         return $this->returnView('product.show', [
             'item' => $this->getProductsArray($item),
             'properties' =>$this->getPropertiesArray($item->category->properties),
         ]);
+        }
     }
 
     /**
